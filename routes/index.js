@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* db연결하는 부분 */
-var mysql_dbc = require('../db/dbConn')();
+var mysql_dbc = require('../db/dbConn');
 var connection = mysql_dbc.init();
 mysql_dbc.testConn(connection);
 /*---------------------------*/
