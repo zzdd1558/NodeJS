@@ -1,6 +1,6 @@
 
 class HttpResponse {
-    
+
     constructor(statusCode) {
         this.additionalData = new Object();
         this.statusCode = statusCode;

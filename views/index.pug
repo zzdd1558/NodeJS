@@ -1,5 +1,7 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1= db연동
+
+  - for(var i=0; i< result.length; i++)
+    li= result[i].idx + " : " + result[i].name + " : " + result[i].age
