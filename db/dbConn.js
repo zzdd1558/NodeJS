@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const config = require('./dbInfo').local;
 
-module.exports = function() {
+module.exports = (function() {
   return {
     init: function() {
       return mysql.createConnection({
@@ -23,4 +23,4 @@ module.exports = function() {
       });
     }
   }
-};
+})();
