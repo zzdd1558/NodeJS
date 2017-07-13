@@ -1,5 +1,5 @@
 .idea
-
+package-lock.json
 # Logs
 logs
 *.log
@@ -58,4 +58,3 @@ typings/
 
 # dotenv environment variables file
 .env
-
