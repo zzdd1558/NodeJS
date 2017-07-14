@@ -32,10 +32,9 @@ router.get('/', function(req, res, next) {
 
 async function dbtest(req, res) {
   try {
-      let db = new Database();
       let query = 'select * from member';
 
-      let result = await db.call(query); // async, await 방식
+      let result = await Database.call(query); // async, await 방식
 
       // db.call(query).then((result)=>{   // promise then catch 방식
       //   ~~
