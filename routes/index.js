@@ -3,32 +3,14 @@ var router = express.Router();
 
 const Database = require('../database/lib/database');
 const HttpResponse = require('../utils/HttpResponse');
-/* db연결하는 부분 */
-var mysql_dbc = require('../db/dbConn');
-var connection = mysql_dbc.init();
-mysql_dbc.testConn(connection);
-/*---------------------------*/
 
+router.get('/', main);
 router.get('/dbtest', dbtest);
-router.get('/', function(req, res, next) {
-  var query = 'select * from member';
-  connection.query(query , function(err,result,fields){
-    if(err){
-      console.log(err);
-    }
-
-    /*
-    console.log(result[0].idx);
-    console.log(result[0].name);
-    console.log(result[0].age);
-    */
 
 
-    res.render('index', {result : result});
-
-
-  })
-});
+function main(req, res) {
+    res.render('main');
+}
 
 async function dbtest(req, res) {
   try {
