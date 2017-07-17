@@ -18,8 +18,7 @@ module.exports = {
                 loader: 'babel-loader',
                 options: {
                     presets: [
-                        'env',
-                        'stage-0'
+                        'es2015'
                     ],
                 },
                 exclude: ['/node_modules']
@@ -65,10 +64,10 @@ module.exports = {
             jQuery: "jquery"
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
-        new ExtractTextPlugin('./public/styles/[name].bundle.css')
+        new ExtractTextPlugin('../styles/[name].bundle.css')
     ],
     resolve: {
         modules: ['node_modules'],
-        extensions: ['.js', '.json', '.jsx', '.css'],
+        extensions: ['.js', '.json', '.jsx', '.css']
     },
 };

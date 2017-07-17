@@ -3,5 +3,8 @@
  */
 import "../styles/style.css";
 import "bootstrap";
-import $ from "jquery";
+import $ from 'jquery';
 
+// $(function () {
+//    console.log(1);
+// });

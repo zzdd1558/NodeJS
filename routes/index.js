@@ -4,7 +4,13 @@ var router = express.Router();
 const Database = require('../database/lib/database');
 const HttpResponse = require('../utils/HttpResponse');
 
+router.get('/', main);
 router.get('/dbtest', dbtest);
+
+
+function main(req, res) {
+    res.render('main');
+}
 
 async function dbtest(req, res) {
   try {
