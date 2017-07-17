@@ -6,7 +6,11 @@ const HttpResponse = require('../utils/HttpResponse');
 
 router.get('/', main);
 router.get('/dbtest', dbtest);
+router.get('/signup',signup);
 
+function signup(req,res){
+    res.render('signup');
+}
 
 function main(req, res) {
     res.render('main');

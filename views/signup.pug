@@ -1,0 +1,56 @@
+extends layout
+
+block header
+    script(src='scripts/signupDate.bundle.js')
+    link(rel='stylesheet', href='styles/login.bundle.css')
+block content
+    h1 회원가입
+    div.container
+        div.row
+            div.col-sm-6
+                div.row
+                    div.col-sm-12
+                        img(src='/images/image.jpg')
+            div.col-sm-6
+                form(action='/signup/createMember' method=post)
+                    div.form-group
+                        label(for='id') 아이디
+                        input.form-control#id(type='password' placeholder='Enter ID')
+                        span  중복체크해서 보여줄 span 부분 비동기처리할부분
+                    div.form-group
+                        label(for='password') 비밀번호
+                        input.form-control#password(type='password' placeholder='Enter Password')
+                        span 비밀번호 체크해서 보여줄 span 부분
+                    div.form-group
+                        label(for='password_confirm') 비밀번호 확인
+                        input.form-control#password_confirm(type='password' placeholder='Enter PasswordConfirm')
+                    div.form-group
+                        label(for='email') 이메일
+                        input.form-control#email(type='email' placeholder='Enter Email')
+                        span  이메일 중복체크해서 보여줄 부분.
+                    div.form-group
+                        label 생년월일
+                        div.row
+                            div.col-sm-4
+                                select.form-control#year
+                            div.col-sm-4
+                                select.form-control#month
+                            div.col-sm-4
+                                select.form-control#date
+                    div.form-group
+                        label 성별
+                        div.row(style="text-align:center")
+                            div.col-sm-6
+                                label.radio-inline
+                                input(type='radio' value='m')#man
+                                | 남자
+                            div.col-sm-6
+                                label.radio-inline
+                                input(type='radio')#women
+                                | 여자
+                    hr
+                    div.form-group
+                        div.col-sm-4.col-sm-offset-9
+                            button.btn.btn-info(type='submit') 가입
+                            span &nbsp;&nbsp;&nbsp;&nbsp;
+                            button.btn.btn-danger(type='reset') 취소
