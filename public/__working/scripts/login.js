@@ -2,9 +2,8 @@
  * Created by parkjp on 2017-07-14.
  */
 import "../styles/style.css";
-import "bootstrap";
-import $ from 'jquery';
+import "./common.js";
 
-// $(function () {
-//    console.log(1);
-// });
+$(function() {
+   console.log(1);
+});

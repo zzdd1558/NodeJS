@@ -32,7 +32,7 @@ module.exports = {
             {
                 test: /\.(png|jpg|jpeg|gif|svg)$/,
                 loaders: [
-                    'file-loader?name=./public/img/[name].[ext]',
+                    'file-loader?name=../img/[name].[ext]',
                     {
                         loader: 'image-webpack-loader',
                         query: {
@@ -49,6 +49,14 @@ module.exports = {
                     }
                 ]
             },
+            {
+                test: /\.(woff|woff2)$/,
+                loader: 'url-loader?limit=10000&name=../img/[name].[ext]'
+            },
+            {
+                test: /\.(eot|ttf|wav|mp3)$/,
+                loader: 'file-loader?name=../media/[name].[ext]'
+            }
         ]
     },
     plugins: [
