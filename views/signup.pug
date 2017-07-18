@@ -2,7 +2,6 @@ extends layout
 
 block header
     script(src='scripts/signup.bundle.js')
-    script(src='scripts/Date.bundle.js')
     link(rel='stylesheet', href='styles/login.bundle.css')
 block content
     h1 회원가입
@@ -11,7 +10,7 @@ block content
             div.col-sm-6
                 div.row
                     div.col-sm-12
-                        img(src='/images/image.jpg')
+                        //img(src='/images/image.jpg')
             div.col-sm-6
                 form(action='/signup/createMember' method=post)
                     div.form-group
