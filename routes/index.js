@@ -7,7 +7,12 @@ const HttpResponse = require('../utils/HttpResponse');
 router.get('/', main);
 router.get('/dbtest', dbtest);
 router.get('/signup',signup);
+router.get('/login',login);
 
+
+function login(req,res){
+    res.render('login');
+}
 function signup(req,res){
     res.render('signup');
 }

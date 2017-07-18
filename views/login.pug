@@ -1,0 +1,42 @@
+extends layout
+block header
+    link(rel='stylesheet', href='styles/login.bundle.css')
+block content
+    h1 로그인
+    div.container
+        div.row
+            div.col-sm-6
+                <!--이미지 주석처리 나중에 맞춰야함-->
+                <!--img(src='/images/lion.png') -->
+            div.col-sm-6
+                <!--이미지 주석처리 나중에 맞춰야함-->
+                <!--img(src='/images/image.jpg' style="width:77%")-->
+                form
+                    div.form-group
+                        label(for='id') 아이디
+                        input.form-control#id(type='text' placeholder='Enter ID')
+                    div.form-group
+                        label(for='password') 비밀번호
+                        input.form-control#password(type='password' placeholder='Enter Password')
+
+                    ul.list-inline.text-right
+                        li
+                            a(href="#") 회원가입
+                        li
+                            a(href="#") 아이디/비밀번호 찾기
+
+
+                    hr
+                    ul.list-inline.text-left.col-sm-10
+                        li
+                            a(href="#")
+                                img(src='/images/google_btn.jpg')
+                        li
+                            a(href="#")
+                                img(src='/images/kakao_btn1.png')
+                        li
+                            a(href="#")
+                                img(src='/images/facebook_btn.jpg')
+
+                    h2
+                        input(type='submit' value='login').btn.btn-info.text-right
