@@ -1,4 +1,5 @@
-import "./common.js";
+
+
 $(document).ready(function(){
     //현재 년월일시간등을 가져와 toDate에 저장
     var toDate = new Date();
