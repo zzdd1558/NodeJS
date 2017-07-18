@@ -5,7 +5,7 @@ block header
     link(rel='stylesheet', href='styles/login.bundle.css')
 block content
     h1 회원가입
-    div.container
+    div.container(style="max-width:1000px")
         div.row
             div.col-sm-6
                 div.row
@@ -31,11 +31,11 @@ block content
                     div.form-group
                         label 생년월일
                         div.row
-                            div.col-sm-4
+                            div.col-sm-4(style="margin-bottom:5px;")
                                 select.form-control#year
-                            div.col-sm-4
+                            div.col-sm-4(style="margin-bottom:5px;")
                                 select.form-control#month
-                            div.col-sm-4
+                            div.col-sm-4(style="margin-bottom:5px;")
                                 select.form-control#date
                     div.form-group
                         label 성별
