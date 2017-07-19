@@ -1,14 +1,17 @@
 import "../styles/style.css";
 import "./common.js";
+
 import DateFormat from '../../../utils/DateFormat';
 const currentDate = new DateFormat();
 
 $(document).ready(function () {
+
+
     $("#month").change(function () {
         let month = $("#month option:selected").val();
         $("select#date > option").remove();
         setSelectDays(month);
-    })
+    });
 
     setYear();
     setMonth();
@@ -30,12 +33,12 @@ $(document).ready(function () {
 
 // select option 에 1~12까지 세팅
     function setMonth() {
-        let checkSelect;
+        let checkSelect; // TODO : checkSelect 초기화 -> ""로
         for (let i = 1; i <= 12; i++) {
             if (i === currentDate.month) {
                 checkSelect = "selected='selected'";
             } else {
-                checkSelect = " ";
+                checkSelect = " ";  //TODO : else 없어도됨.
             }
             $("select#month").append("<option " + checkSelect + " value='" + i + "'>" + i + "월</option>");
         }
@@ -56,7 +59,5 @@ $(document).ready(function () {
             }
             $("select#date").append("<option " + checkSelect + " value='" + i + "'>" + i + "일</option>");
         }
-
-
     }
-})
+});

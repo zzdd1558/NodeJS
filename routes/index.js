@@ -17,6 +17,7 @@ function signup(req,res){
     res.render('signup');
 }
 
+
 function main(req, res) {
     res.render('main');
 }

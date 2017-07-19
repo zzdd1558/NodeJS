@@ -1,21 +1,27 @@
 extends layout
 block header
+    //카카오 로그인을 위한 js 파일 가져오기
+    script(src='//developers.kakao.com/sdk/js/kakao.min.js')
+
+    //네이버 로그인을 위한 js 파일 가져오기
+    //script(src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js")
+    script(src='./scripts/login.bundle.js')
     link(rel='stylesheet', href='styles/login.bundle.css')
 block content
     h1 로그인
     div.container
         div.row
             div.col-sm-6(style="text-align:center;")
-                a(href="#")
+                a(href="#" id='custom-login-btn-facebook')
                     img(src='./img/facebook.png' style='margin-bottom:3px;').img-rounded
                 br
                 a(href="#")
                     img(src='./img/google.png' style='margin-bottom:3px;').img-rounded
                 br
-                a(href="#")
-                    img(src='./img/kakao.png' style='margin-bottom:3px;').img-rounded
+                a(href="#" id='login-btn-kakao')
+                    img(src='./img/kakao.png' style='margin-bottom:3px;' ).img-rounded
                 br
-                a(href="#")
+                a(href="#" id="login-btn-naver")
                     img(src='./img/naver.png' style='margin-bottom:3px;').img-rounded
             div.col-sm-6
                 form
