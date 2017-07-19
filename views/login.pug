@@ -4,7 +4,9 @@ block header
     script(src='//developers.kakao.com/sdk/js/kakao.min.js')
 
     //네이버 로그인을 위한 js 파일 가져오기
+    script(src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8")
     //script(src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js")
+
     script(src='./scripts/login.bundle.js')
     link(rel='stylesheet', href='styles/login.bundle.css')
 block content
@@ -12,17 +14,27 @@ block content
     div.container
         div.row
             div.col-sm-6(style="text-align:center;")
-                a(href="#" id='custom-login-btn-facebook')
+                a(href="#" )#login_btn_facebook
                     img(src='./img/facebook.png' style='margin-bottom:3px;').img-rounded
                 br
-                a(href="#")
+                a(href="#" )#login_btn_google
                     img(src='./img/google.png' style='margin-bottom:3px;').img-rounded
                 br
-                a(href="#" id='login-btn-kakao')
+                a(href="#" )#login_btn_kakao
                     img(src='./img/kakao.png' style='margin-bottom:3px;' ).img-rounded
                 br
-                a(href="#" id="login-btn-naver")
-                    img(src='./img/naver.png' style='margin-bottom:3px;').img-rounded
+                a(href="#")#naver_id_login
+                img(src='./img/naver.png' style='margin-bottom:3px;' ).img-rounded
+
+                script.
+                    var naver_id_login = new naver_id_login("VxgHymo8VpJl3iyxveUB", "http://localhost:3000/");
+                    var state = naver_id_login.getUniqState();
+                    naver_id_login.response_type = "code";
+                    naver_id_login.setButton("green", 3, 40);
+                    naver_id_login.setDomain("http://localhost:3000/login");
+                    naver_id_login.setState(state);
+                    naver_id_login.init_naver_id_login();
+
             div.col-sm-6
                 form
                     div.form-group
