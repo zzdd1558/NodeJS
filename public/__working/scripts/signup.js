@@ -16,48 +16,60 @@ $(document).ready(function () {
     setYear();
     setMonth();
     setSelectDays(currentDate.month);
+});
+
 
 // 현재 년도 - this.maxYear 한만큼 select option 생성.
-    function setYear() {
-        let checkSelect;
-        for (var i = currentDate.year; i > currentDate.year - 120; i--) {
-            if (i === currentDate.year) {
-                checkSelect = "selected='selected'";
-            } else {
-                checkSelect = " ";
-            }
-            $("select#year").append("<option " + checkSelect + " value='" + i + "'>" + i + "년</option>");
+function setYear() {
+    let checkSelect;
+    for (var i = currentDate.year; i > currentDate.year - 120; i--) {
+        if (i === currentDate.year) {
+            checkSelect = "selected='selected'";
+        } else {
+            checkSelect = " ";
         }
-
+        $("select#year").append("<option " + checkSelect + " value='" + i + "'>" + i + "년</option>");
     }
+
+}
 
 // select option 에 1~12까지 세팅
-    function setMonth() {
-        let checkSelect; // TODO : checkSelect 초기화 -> ""로
-        for (let i = 1; i <= 12; i++) {
-            if (i === currentDate.month) {
-                checkSelect = "selected='selected'";
-            } else {
-                checkSelect = " ";  //TODO : else 없어도됨.
-            }
-            $("select#month").append("<option " + checkSelect + " value='" + i + "'>" + i + "월</option>");
+function setMonth() {
+    let checkSelect; // TODO : checkSelect 초기화 -> ""로
+    for (let i = 1; i <= 12; i++) {
+        if (i === currentDate.month) {
+            checkSelect = "selected='selected'";
+        } else {
+            checkSelect = " ";  //TODO : else 없어도됨.
         }
-
+        $("select#month").append("<option " + checkSelect + " value='" + i + "'>" + i + "월</option>");
     }
+}
+function setMonth() {
+    let checkSelect; // TODO : checkSelect 초기화 -> ""로
+    for (let i = 1; i <= 12; i++) {
+        if (i === currentDate.month) {
+            checkSelect = "selected='selected'";
+        } else {
+            checkSelect = " ";  //TODO : else 없어도됨.
+        }
+        $("select#month").append("<option " + checkSelect + " value='" + i + "'>" + i + "월</option>");
+    }
+
+}
 
 // month가 바뀔때마다 select option 갱신.
 // 매개변수 month가 없을경우 this.month로 대체.
-    function setSelectDays(month = currentDate.month) {
-        let days = currentDate.getFullDays(month);
-        let checkSelect;
+function setSelectDays(month = currentDate.month) {
+    let days = currentDate.getFullDays(month);
+    let checkSelect;
 
-        for (let i = 1; i <= days; i++) {
-            if (i === currentDate.date) {
-                checkSelect = "selected='selected'";
-            } else {
-                checkSelect = " ";
-            }
-            $("select#date").append("<option " + checkSelect + " value='" + i + "'>" + i + "일</option>");
+    for (let i = 1; i <= days; i++) {
+        if (i === currentDate.date) {
+            checkSelect = "selected='selected'";
+        } else {
+            checkSelect = " ";
         }
+        $("select#date").append("<option " + checkSelect + " value='" + i + "'>" + i + "일</option>");
     }
-});
+}
