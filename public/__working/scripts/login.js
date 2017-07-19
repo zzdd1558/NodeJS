@@ -14,6 +14,7 @@ $(document).ready(function(){
 
     $("#login_btn_kakao").click(function(){
        console.log("kakao");
+
         loginWithKakao();
     })
 

@@ -1,14 +1,74 @@
 extends layout
 block header
+
+    link(rel='stylesheet', href='styles/login.bundle.css')
+    script.
+        function handleClientLoad() {
+            // Loads the client library and the auth2 library together for efficiency.
+            // Loading the auth2 library is optional here since `gapi.client.init` function will load
+            // it if not already loaded. Loading it upfront can save one network request.
+            gapi.load('client:auth2', initClient);
+        }
+
+        function initClient() {
+            // Initialize the client with API key and People API, and initialize OAuth with an
+            // OAuth 2.0 client ID and scopes (space delimited string) to request access.
+            gapi.client.init({
+                apiKey: 'AIzaSyCtYWWs0WsnAfC4EmYFMoLIoETvPvoPKMg',
+                discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
+                clientId: '393277494210-pefadhtq8di5fqcfooo6hghp60fvjfeu.apps.googleusercontent.com',
+                scope: 'profile'
+            }).then(function () {
+                // Listen for sign-in state changes.
+                gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+                // Handle the initial sign-in state.
+                updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            });
+        }
+
+        function updateSigninStatus(isSignedIn) {
+            // When signin status changes, this function is called.
+            // If the signin status is changed to signedIn, we make an API call.
+            if (isSignedIn) {
+                makeApiCall();
+            }
+        }
+
+        function handleSignInClick(event) {
+            // Ideally the button should only show up after gapi.client.init finishes, so that this
+            // handler won't be called before OAuth is initialized.
+            gapi.auth2.getAuthInstance().signIn();
+        }
+
+        function handleSignOutClick(event) {
+            gapi.auth2.getAuthInstance().signOut();
+        }
+
+        function makeApiCall() {
+            // Make an API call to the People API, and print the user's given name.
+            gapi.client.people.people.get({
+                'resourceName': 'people/me',
+                'requestMask.includeField': 'person.names'
+            }).then(function (response) {
+                console.log('Hello, ' + response.result.names[0].givenName);
+            }, function (reason) {
+                console.log('Error: ' + reason.result.error.message);
+            });
+        }
+
+    script(async defer src="https://apis.google.com/js/api.js"
+    onload="this.onload=function(){};handleClientLoad()"
+    onreadystatechange="if (this.readyState === 'complete') this.onload()")
     //카카오 로그인을 위한 js 파일 가져오기
     script(src='//developers.kakao.com/sdk/js/kakao.min.js')
 
     //네이버 로그인을 위한 js 파일 가져오기
     script(src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8")
     //script(src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js")
-
     script(src='./scripts/login.bundle.js')
-    link(rel='stylesheet', href='styles/login.bundle.css')
+
+
 block content
     h1 로그인
     div.container
@@ -17,8 +77,12 @@ block content
                 a(href="#" )#login_btn_facebook
                     img(src='./img/facebook.png' style='margin-bottom:3px;').img-rounded
                 br
-                a(href="#" )#login_btn_google
+
+
+                button(onclick="handleSignInClick()" style="background-image:url('./img/google.png')")#login_btn_google asfasdf
+                a(href="#" )
                     img(src='./img/google.png' style='margin-bottom:3px;').img-rounded
+
                 br
                 a(href="#" )#login_btn_kakao
                     img(src='./img/kakao.png' style='margin-bottom:3px;' ).img-rounded
