@@ -5,12 +5,19 @@ block content
     h1 로그인
     div.container
         div.row
+            div.col-sm-6(style="text-align:center;")
+                a(href="#")
+                    img(src='./img/facebook.png' style='margin-bottom:3px;').img-rounded
+                br
+                a(href="#")
+                    img(src='./img/google.png' style='margin-bottom:3px;').img-rounded
+                br
+                a(href="#")
+                    img(src='./img/kakao.png' style='margin-bottom:3px;').img-rounded
+                br
+                a(href="#")
+                    img(src='./img/naver.png' style='margin-bottom:3px;').img-rounded
             div.col-sm-6
-                <!--이미지 주석처리 나중에 맞춰야함-->
-                <!--img(src='/images/lion.png') -->
-            div.col-sm-6
-                <!--이미지 주석처리 나중에 맞춰야함-->
-                <!--img(src='/images/image.jpg' style="width:77%")-->
                 form
                     div.form-group
                         label(for='id') 아이디
@@ -18,25 +25,16 @@ block content
                     div.form-group
                         label(for='password') 비밀번호
                         input.form-control#password(type='password' placeholder='Enter Password')
+                    div.form-group.text-left
+
+                        input(type='checkbox' value='Y' id='check')
+                        label(for='check')   아이디 기억
 
                     ul.list-inline.text-right
                         li
                             a(href="#") 회원가입
                         li
                             a(href="#") 아이디/비밀번호 찾기
-
-
                     hr
-                    ul.list-inline.text-left.col-sm-10
-                        li
-                            a(href="#")
-                                img(src='/img/google_btn.jpg')
-                        li
-                            a(href="#")
-                                img(src='./img/kakao_btn.png')
-                        li
-                            a(href="#")
-                                img(src='./img/facebook_btn.jpg')
-
                     h2
-                        input(type='submit' value='login').btn.btn-info.text-right
+                        input(type='submit' value='로그인').btn.btn-info.pull-right
