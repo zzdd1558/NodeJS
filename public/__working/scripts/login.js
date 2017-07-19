@@ -3,9 +3,11 @@
  */
 import "../styles/style.css";
 import "./common.js";
-import '../img/login/facebook_btn.jpg'
-import '../img/login/kakao_btn.png'
-import '../img/login/google_btn.jpg'
+import '../img/login/facebook.png'
+import '../img/login/google.png'
+import '../img/login/kakao.png'
+import '../img/login/naver.png'
+
 $(function() {
    console.log(1);
 });
