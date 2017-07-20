@@ -216,17 +216,18 @@ var naver_id_login = function (client_id,redirect_uri)
         {
             naver_id_popup_option = " onClick=\"window.open(this.href, 'naverloginpop', 'titlebar=1, resizable=1, scrollbars=yes, width=600, height=550'); return false\" ";
         }
-        if (this.button_type == BUTTON_TYPE)
+        /*if (this.button_type == BUTTON_TYPE)
         {
             naver_id_login_contents="<a href='"+naver_id_login_url+"' "+naver_id_popup_option+" id='naver_id_login_anchor'><img src='http://static.nid.naver.com/oauth/button_"+color+".PNG' border='0' title='�ㅼ씠踰� �꾩씠�붾줈 濡쒓렇��' width='"+this.button_height+"' height='"+this.button_height+"'></a> ";
         }
         else if (this.button_type == BANNER_SMALL_TYPE)
         {
             naver_id_login_contents="<a href='"+naver_id_login_url+"' "+naver_id_popup_option+" id='naver_id_login_anchor'><img src='http://static.nid.naver.com/oauth/small_"+color+"_in.PNG' border='0' title='�ㅼ씠踰� �꾩씠�붾줈 濡쒓렇��' width='"+(this.button_height*656/250)+"px' height='"+this.button_height+"'></a> ";
-        }
+        }*/
         else
         {
-            naver_id_login_contents="<a href='"+naver_id_login_url+"' "+naver_id_popup_option+" id='naver_id_login_anchor'><img src='http://static.nid.naver.com/oauth/big_"+color+".PNG' border='0' title='�ㅼ씠踰� �꾩씠�붾줈 濡쒓렇��' width='"+(this.button_height*185/40)+"px' height='"+this.button_height+"px'></a> ";
+            //직접 수정한 부분. #naver_id_login 밑에 추가한다. login.pug 밑에 추가되게 해놨습니다.
+            naver_id_login_contents="<a href='"+naver_id_login_url+"' "+naver_id_popup_option+" id='naver_id_login_anchor'><img src='../img/naver.png' border='0' title='�ㅼ씠踰� �꾩씠�붾줈 濡쒓렇��'></a> ";
         }
         naver_id_login.innerHTML=naver_id_login_contents;
         if (this.is_callback)
