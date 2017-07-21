@@ -20,7 +20,7 @@ $(document).ready(function(){
 
     $("#login_btn_kakao").click(function(){
        console.log("kakao");
-        loginWithKakao();
+       loginWithKakao();
     });
 
     $("#naver_id_login").click(function(){
@@ -55,11 +55,11 @@ function loginWithFacebook(){
 }
 
 function loginWithNaver() {
-       let naver_id_login = new naverLoginApi("VxgHymo8VpJl3iyxveUB", "http://localhost:3000/");
-       let state = naver_id_login.getUniqState();
-       naver_id_login.response_type = "code";
-       naver_id_login.setButton("green", 3, 40);
-       naver_id_login.setDomain("http://localhost:3000/login");
-       naver_id_login.setState(state);
-       naver_id_login.init_naver_id_login();
+    let naver_id_login = new naverLoginApi("VxgHymo8VpJl3iyxveUB", "http://localhost:3000/");
+    let state = naver_id_login.getUniqState();
+    naver_id_login.response_type = "code";
+    naver_id_login.setButton("green", 3, 40);
+    naver_id_login.setDomain("http://localhost:3000/login");
+    naver_id_login.setState(state);
+    naver_id_login.init_naver_id_login();
 }
