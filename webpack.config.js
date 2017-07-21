@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
+// webpack --progress --colors --watch
 module.exports = {
     entry: {
         login:  './public/__working/scripts/login.js',

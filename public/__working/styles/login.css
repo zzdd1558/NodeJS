@@ -1,0 +1,53 @@
+@import 'boostrap.css';
+
+body {
+    padding: 0 15px;
+}
+
+.login_container {
+    max-width: 900px;
+    margin: 8% auto 0;
+    padding: 3%;
+}
+
+.login_h1 {
+    margin-bottom: 8%;
+}
+
+.login_btn_container {
+    text-align:center;
+}
+
+.login_btn {
+    margin: 5px 0px;
+    width: 274px;
+    height: 39px;
+    border : 0px;
+}
+
+.login_btn_facebook {
+    background-image: url('../img/login/facebook.png');
+}
+
+.login_btn_google {
+    background-image: url('../img/login/google.png');
+}
+
+.login_btn_kakao {
+    background-image: url('../img/login/kakao.png');
+}
+
+.login_btn_naver {
+    margin: 5px 0px;
+}
+
+.login_helper {
+    display: inline-block;
+    float: right;
+}
+
+@media (max-width: 768px) {
+    .login_btn_container {
+        margin-bottom: 12%;
+    }
+}

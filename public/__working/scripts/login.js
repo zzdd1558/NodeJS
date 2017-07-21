@@ -1,7 +1,7 @@
 /**
  * Created by parkjp on 2017-07-14.
  */
-import "../styles/style.css";
+import "../styles/login.css";
 import "./common.js";
 import googleLoginApi from "./socialLoginApis/google.js";
 import naverLoginApi from "./socialLoginApis/naver.js";

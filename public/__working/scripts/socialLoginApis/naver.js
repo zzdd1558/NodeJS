@@ -11,13 +11,13 @@
  */
 
 /**
- 怨듯넻 �곸뿭
+ 공통 영역
  */
-//踰꾪듉 醫낅쪟�� ���� �뺤쓽
+//버튼 종류에 대한 정의
 const BUTTON_TYPE = 1;
 const BANNER_SMALL_TYPE = 2;
 const BANNER_BIG_TYPE = 3;
-//踰꾪듉 �됯퉼�� ���� �뺤쓽
+//버튼 색깔에 대한 정의
 const BUTTON_COLOR_WHITE = "white";
 const BUTTON_COLOR_GREEN = "green";
 var color = "";
@@ -90,7 +90,7 @@ var naver_id_login = function (client_id,redirect_uri)
         return stat_str;
     };
     /**
-     * local Storage�� �대떦 name �� key濡� 媛�吏��� value 媛믪쓣 �덉쟾�섍쾶 諛쏆븘�⑤떎.
+     * local Storage에 해당 name 을 key로 가지는 value 값을 안전하게 받아온다.
      * @ignore
      * @param {string} local Storage �� ���λ맂 �ㅺ컪
      * @private
@@ -164,14 +164,14 @@ var naver_id_login = function (client_id,redirect_uri)
         {
             this.state = this.oauthParams.state;
         }
-        if ( ( this.client_id == undefined ) || ( this.client_id == "�깅줉�� ClientID 媛�" ) || ( this.client_id.length < 5 ) )
+        if ( ( this.client_id == undefined ) || ( this.client_id == "등록한 ClientID 값" ) || ( this.client_id.length < 5 ) )
         {
-            alert("�깅줉�� ClientID 媛믪쓣 �낅젰�� 二쇱꽭��.");
+            alert("등록한 ClientID 값을 입력해 주세요.");
             return false;
         }
-        if ( ( this.redirect_uri == undefined ) || ( this.redirect_uri == "�깅줉�� Callback URL 媛�" ) || ( this.redirect_uri.length < 5 ) )
+        if ( ( this.redirect_uri == undefined ) || ( this.redirect_uri == "등록한 Callback URL 값" ) || ( this.redirect_uri.length < 5 ) )
         {
-            alert("�깅줉�� Callback URL 媛믪쓣 �낅젰�� 二쇱꽭��.");
+            alert("등록한 Callback URL 값을 입력해 주세요.");
             return false;
         }
         var call_url = this.authorize_url+"?response_type="+this.response_type+"&client_id="+this.client_id+"&redirect_uri="+encodeURIComponent(this.redirect_uri)+"&state="+encodeURIComponent(this.state);
@@ -193,7 +193,7 @@ var naver_id_login = function (client_id,redirect_uri)
         var naver_id_login = document.getElementById('naver_id_login');
         if (naver_id_login==undefined)
         {
-            alert("id 媛� naver_id_login �� div tag 媛� 議댁옱�댁빞 �⑸땲��.");
+            alert("id 가 naver_id_login 인 div tag 가 존재해야 합니다.");
             return false;
         }
         if (this.button_color=="green")
@@ -227,7 +227,7 @@ var naver_id_login = function (client_id,redirect_uri)
         else
         {
             //직접 수정한 부분. #naver_id_login 밑에 추가한다. login.pug 밑에 추가되게 해놨습니다.
-            naver_id_login_contents="<a href='"+naver_id_login_url+"' "+naver_id_popup_option+" id='naver_id_login_anchor'><img src='../img/naver.png' border='0' title='�ㅼ씠踰� �꾩씠�붾줈 濡쒓렇��'></a> ";
+            naver_id_login_contents="<a href='"+naver_id_login_url+"' "+naver_id_popup_option+" id='naver_id_login_anchor'><img src='../img/naver.png' border='0' title='네이버 아이디로 로그인'></a> ";
         }
         naver_id_login.innerHTML=naver_id_login_contents;
         if (this.is_callback)
@@ -399,7 +399,7 @@ var naver_id_login = function (client_id,redirect_uri)
                             /*
                              * state 媛� 留욎� �딆쓬 localstorage 諛� cookie �ъ슜�� 遺덇��ν븳 寃쎌슦�� nil_login.setState(....); 濡� 吏��� �댁빞 ��.
                              */
-                            alert("state 媛믪씠 留욎씠 �딆뒿�덈떎.");
+                            alert("state 값이 맞이 않습니다.");
                             this.callback_status="warning";
                             this.callback_message = "state miss match";
                         }
