@@ -11,10 +11,10 @@ import '../img/login/kakao.png';
 import '../img/login/naver.png';
 
 const google = new googleLoginApi();
-
+Kakao.init('0e34b26f5967894741aa1e4f97e1537b');
 $(document).ready(function(){
     //kakao Login 부분
-    Kakao.init('0e34b26f5967894741aa1e4f97e1537b');
+
     google.handleClientLoad();
     loginWithNaver();
 
@@ -39,15 +39,28 @@ $(document).ready(function(){
 
 
 function loginWithKakao() {
-    // 로그인 창을 띄웁니다.
     Kakao.Auth.login({
-        success: function (authObj) {
-            alert(JSON.stringify(authObj));
+        success: function(authObj) {
+            // 로그인 성공시, API를 호출합니다.
+            Kakao.API.request({
+                url: '/v1/user/me',
+                success: function(res) {
+                    alert(JSON.stringify(res));
+
+                    //로그인 회원의 이메일 , 닉네임 ,
+                    console.log("1 : " + res.kaccount_email);
+                    console.log("2 : " + res.properties.nickname);
+                },
+                fail: function(error) {
+                    alert(JSON.stringify(error));
+                }
+            });
         },
-        fail: function (err) {
+        fail: function(err) {
             alert(JSON.stringify(err));
         }
     });
+
 }
 
 function loginWithFacebook(){
@@ -55,7 +68,7 @@ function loginWithFacebook(){
 }
 
 function loginWithNaver() {
-    let naver_id_login = new naverLoginApi("VxgHymo8VpJl3iyxveUB", "http://localhost:3000/");
+    let naver_id_login = new naverLoginApi("VxgHymo8VpJl3iyxveUB", "http://localhost:3000/member");
     let state = naver_id_login.getUniqState();
     naver_id_login.response_type = "code";
     naver_id_login.setButton("green", 3, 40);

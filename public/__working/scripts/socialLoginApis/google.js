@@ -41,7 +41,7 @@ function makeApiCall() {
         'resourceName': 'people/me',
         'requestMask.includeField': 'person.names'
     }).then(function (response) {
-        console.log('Hello, ' + response.result.names[0].givenName);
+         console.log('Hello, ' + response.result.names[0].givenName);
     }, function (reason) {
         console.log('Error: ' + reason.result.error.message);
     });
