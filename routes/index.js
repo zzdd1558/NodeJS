@@ -68,13 +68,13 @@ function member(req, res) {
             res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
             let jsonBody = JSON.parse(body);
             token = jsonBody.access_token;
+            res.end(body);
         } else {
             res.status(response.statusCode).end();
             console.log('error = ' + response.statusCode);
         }
     });
 
-    res.send("hi");
 }
 
 async function dbtest(req, res) {
