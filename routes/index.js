@@ -1,4 +1,3 @@
-var request = require('request');
 var express = require('express');
 var router = express.Router();
 
@@ -40,46 +39,50 @@ function profile(req,res){
         url: api_url,
         headers: {'Authorization': header}
     };
-    request.get(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
-            let parseBody = JSON.parse(body);
-            console.log(parseBody)
-            res.end(body);
-        } else {
-            console.log('error');
-            if(response != null) {
-                res.status(response.statusCode).end();
-                console.log('error = ' + response.statusCode);
-            }
-        }
-    });
+    // request.get(options, function (error, response, body) {
+    //     if (!error && response.statusCode == 200) {
+    //         res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
+    //         let parseBody = JSON.parse(body);
+    //         console.log(parseBody)
+    //         res.end(body);
+    //     } else {
+    //         console.log('error');
+    //         if(response != null) {
+    //             res.status(response.statusCode).end();
+    //             console.log('error = ' + response.statusCode);
+    //         }
+    //     }
+    // });
 }
 
 
 //액세스 토큰을 얻어오는곳.
 function member(req, res) {
-    code = req.query.code;
-    state = req.query.state;
-    api_url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
-        + client_id + '&client_secret=' + client_secret + '&redirect_uri=' + redirectURI + '&code=' + code + '&state=' + state;
+    try {
+        code = req.query.code;
+        state = req.query.state;
+        api_url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
+            + client_id + '&client_secret=' + client_secret + '&redirect_uri=' + redirectURI + '&code=' + code + '&state=' + state;
 
-    var options = {
-        url: api_url,
-        headers: {'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret': client_secret}
-    };
-    request.get(options, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
-            res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
-            let jsonBody = JSON.parse(body);
-            token = jsonBody.access_token;
-            res.end(body);
-        } else {
-            res.status(response.statusCode).end();
-            console.log('error = ' + response.statusCode);
-        }
-    });
+        var options = {
+            url: api_url,
+            headers: {'X-Naver-Client-Id':client_id, 'X-Naver-Client-Secret': client_secret}
+        };
+    } catch (e) {
 
+    }
+
+    // request.get(options, function (error, response, body) {
+    //     if (!error && response.statusCode == 200) {
+    //         res.writeHead(200, {'Content-Type': 'text/json;charset=utf-8'});
+    //         let jsonBody = JSON.parse(body);
+    //         token = jsonBody.access_token;
+    //         res.end(body);
+    //     } else {
+    //         res.status(response.statusCode).end();
+    //         console.log('error = ' + response.statusCode);
+    //     }
+    // });
 }
 
 async function dbtest(req, res) {
