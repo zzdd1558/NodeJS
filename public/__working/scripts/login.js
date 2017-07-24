@@ -45,8 +45,6 @@ function loginWithKakao() {
             Kakao.API.request({
                 url: '/v1/user/me',
                 success: function(res) {
-                    alert(JSON.stringify(res));
-
                     //로그인 회원의 이메일 , 닉네임 ,
                     console.log("1 : " + res.kaccount_email);
                     console.log("2 : " + res.properties.nickname);

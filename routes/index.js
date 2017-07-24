@@ -13,12 +13,17 @@ let redirectURI = encodeURI("http://localhost:3000/member");
 let api_url = "";
 let token;
 
+
 router.get('/', main);
+router.get('/profile', profile);
 router.get('/dbtest', dbtest);
 router.get('/signup',signup);
 router.get('/login',login);
 router.get('/member',member);
 
+function main(req,res){
+    res.render('main');
+}
 
 function login(req,res){
     res.render('login');
@@ -28,7 +33,7 @@ function signup(req,res){
 }
 
 //액세스 토큰을 통해 회원 정보를 얻어오는곳
-function main(req,res){
+function profile(req,res){
     api_url = 'https://openapi.naver.com/v1/nid/me';
     var header = "Bearer " + token; // Bearer 다음에 공백 추가
     let options = {
