@@ -1,7 +1,25 @@
 extends layout
 block header
-    script(src='scripts/login.bundle.js')
-    link(rel='stylesheet', href='styles/login.bundle.css')
+    script(src='scripts/main.bundle.js')
+    link(rel='stylesheet', href='styles/main.bundle.css')
 block content
     div(class='navbar navbar-default')
-        
+
+    div.wrapper
+        div.inline.category-container
+            div.padding.category-inner
+                | category
+            div.padding.opensource-link
+                | link
+
+        div.inline.posts-container
+            div.padding.posts-contents
+                | contents
+            div.padding.posts-list
+                | list
+
+        div.inline.analytics-container
+            div.padding.latest-comments
+                | comments
+            div.padding.analytics
+                | analytics

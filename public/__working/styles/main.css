@@ -1,0 +1,52 @@
+@import 'boostrap.css';
+
+.navbar {
+    margin-bottom: 0px;
+}
+
+.wrapper {
+    width: 100%;
+    height: 897px;
+    display: inline-flex;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.padding {
+    padding: 5%;
+}
+
+.category-container {
+    height: 100%;
+    width: 20%;
+    border-right: 1px solid #eee;
+}
+
+.category-inner {
+    height: 90%;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+.posts-container {
+    height: 100%;
+    width: 60%;
+    border-right: 1px solid #eee;
+}
+
+.posts-contents {
+    height: 40%;
+    border-bottom: 1px solid #eee;
+}
+
+.analytics-container {
+    height: 100%;
+    widtH: 20%;
+}
+
+.latest-comments {
+    height: 60%;
+    border-bottom: 1px solid #eee;
+}

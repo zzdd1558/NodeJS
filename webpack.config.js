@@ -5,7 +5,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     entry: {
         login:  './public/__working/scripts/login.js',
-        signup: './public/__working/scripts/signup.js'
+        signup: './public/__working/scripts/signup.js',
+        main: './public/__working/scripts/main.js'
     },
     output: {
         path: __dirname + '/public/scripts',
