@@ -2,6 +2,7 @@
  * Created by parkjp on 2017-07-20.
  */
 
+
 class GoogleLoginApi {
 
     handleClientLoad() {
@@ -45,6 +46,10 @@ function makeApiCall() {
     }, function (reason) {
         console.log('Error: ' + reason.result.error.message);
     });
+
+
 }
+
+
 
 module.exports = GoogleLoginApi;
