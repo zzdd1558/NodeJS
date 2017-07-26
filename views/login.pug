@@ -2,7 +2,6 @@ extends layout
 block header
     link(rel='stylesheet', href='styles/login.bundle.css')
 
-    //script(src="https://apis.google.com/js/api.js")
     script(src="https://apis.google.com/js/api:client.js")
     meta(name="google-signin-scope" content="profile email")
     meta(name="google-signin-client_id" content="393277494210-pefadhtq8di5fqcfooo6hghp60fvjfeu.apps.googleusercontent.com")
@@ -14,12 +13,17 @@ block content
         div.row
             h1.login_h1 로그인
             div.col-sm-6.login_btn_container
+
+                //Facebook 로그인 button
                 button.login_btn.login_btn_facebook#login_btn_facebook
                 br
+                //Google 로그인 button
                 button.login_btn.login_btn_google#login_btn_google
                 br
+                //Kakao 로그인 button
                 button.login_btn.login_btn_kakao#login_btn_kakao
                 br
+                //Naver 로그인 button
                 div.login_btn_naver#naver_id_login
             div.col-sm-6
                 form
