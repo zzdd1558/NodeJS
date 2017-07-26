@@ -5,7 +5,7 @@ import "../styles/login.css";
 import "./common.js";
 import googleLoginApi from "./socialLoginApis/google.js";
 import naverLoginApi from "./socialLoginApis/naver.js";
-import facebookLoginApi from "./socialLoginApis/facebook.js";
+import "./socialLoginApis/facebook.js";
 import "./socialLoginApis/facebook.js";
 import '../img/login/facebook.png';
 import '../img/login/google.png';
@@ -17,7 +17,7 @@ const google = new googleLoginApi();
 Kakao.init('0e34b26f5967894741aa1e4f97e1537b');
 $(document).ready(function () {
     //kakao Login 부분
-    google.handleClientLoad();
+    google.startApp();
     loginWithNaver();
 
 
@@ -39,7 +39,7 @@ $(document).ready(function () {
 
     $("#login_btn_google").click(function () {
         console.log("google");
-        google.handleSignInClick();
+        // google.handleSignInClick();
     });
 });
 
@@ -83,10 +83,12 @@ function loginWithFacebook() {
         if (response.authResponse) {
             let access_token = response.authResponse.accessToken; //get access token
             let user_id = response.authResponse.userID; //get FB UID
+
+            //Facebook Login User access_token
             console.log('Facebook access_token = ' + access_token);
+
+            //Facebook Login User user_id
             console.log('Facebook user_id = ' + user_id);
-            //user just authorized your app
-            //document.getElementById('loginBtn').style.display = 'none';
             getUserData();
         }
     }, {
@@ -98,6 +100,8 @@ function loginWithFacebook() {
 
 function getUserData() {
     FB.api('/me', {fields: 'name,email,gender,birthday'}, function (response) {
+        
+        //페이스북 User에 대한 정보를 받아서 출력
         console.log("Facebook UserDate : " + JSON.stringify(response));
 
     });

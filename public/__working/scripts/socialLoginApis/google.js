@@ -1,55 +1,52 @@
 /**
- * Created by parkjp on 2017-07-20.
+ * Created by yunjin on 2017-07-20.
  */
 
 
 class GoogleLoginApi {
 
-    handleClientLoad() {
-        gapi.load('client:auth2', this.initClient);
-    }
-
-    initClient() {
-        gapi.client.init({
-            apiKey: 'AIzaSyCtYWWs0WsnAfC4EmYFMoLIoETvPvoPKMg',
-            discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
-            clientId: '393277494210-pefadhtq8di5fqcfooo6hghp60fvjfeu.apps.googleusercontent.com',
-            scope: 'profile'
-        }).then(function () {
-            gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
-
-            updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+    startApp() {
+        gapi.load('auth2', function () {
+            // Retrieve the singleton for the GoogleAuth library and set up the client.
+            let auth2 = gapi.auth2.init({
+                client_id: '393277494210-pefadhtq8di5fqcfooo6hghp60fvjfeu.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+                // Request scopes in addition to 'profile' and 'email'
+                //scope: 'additional_scope'
+            });
+            GoogleLoginApi.attachSignin(document.getElementById('login_btn_google'), auth2);
         });
-    }
+    };
 
-     handleSignInClick(event) {
-        gapi.auth2.getAuthInstance().signIn();
-    }
+    static attachSignin(element,auth2) {
+        console.log(element.id);
+        auth2.attachClickHandler(element, {},
+            function onSuccess(googleUser) {
+                var profile = googleUser.getBasicProfile();
+                
+                //사용자에 대한 고유 ID 출력
+                console.log("ID: " + profile.getId()); 
+                
+                //사용자의 '풀네임'을 출력
+                console.log('Full Name: ' + profile.getName());
+                
+                //사용자의 '이름' 출력
+                console.log('Given Name: ' + profile.getGivenName());
 
-     handleSignOutClick(event) {
-        gapi.auth2.getAuthInstance().signOut();
+                //사용자의 '성' 출력
+                console.log('Family Name: ' + profile.getFamilyName());
+                
+                //사용자의 이미지 URL 주소 출력
+                console.log("Image URL: " + profile.getImageUrl());
+                
+                //사용자의 google 계정 Email을 출력
+                console.log("Email: " + profile.getEmail());
+
+            }, function (error) {
+                alert(JSON.stringify(error, undefined, 2));
+            });
     }
 }
-
-function updateSigninStatus(isSignedIn) {
-    if (isSignedIn) {
-        makeApiCall();
-    }
-}
-
-function makeApiCall() {
-    gapi.client.people.people.get({
-        'resourceName': 'people/me',
-        'requestMask.includeField': 'person.names'
-    }).then(function (response) {
-         console.log('Hello, ' + response.result.names[0].givenName);
-    }, function (reason) {
-        console.log('Error: ' + reason.result.error.message);
-    });
-
-
-}
-
 
 
 module.exports = GoogleLoginApi;
