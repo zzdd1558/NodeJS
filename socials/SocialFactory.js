@@ -14,3 +14,4 @@ const SocialType = {
 };
 
 module.exports = SocialFactory;
+module.exports.socialType = SocialType;

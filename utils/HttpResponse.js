@@ -7,6 +7,9 @@ class HttpResponse {
         switch (this.statusCode) {
             case StatusCode.OK :
                 break;
+            case StatusCode.PARAMETER_WRONG :
+                this.description = 'Parameter is wrong';
+                break;
             case StatusCode.NOT_EXIST :
                 this.description = 'Not Exist';
                 break;
@@ -32,6 +35,7 @@ class HttpResponse {
 
 const StatusCode = {
     OK : 200,
+    PARAMETER_WRONG : 400,
     NOT_EXIST : 404,
     UNEXPECTED : 500
 };
