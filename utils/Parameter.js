@@ -15,10 +15,12 @@ class Parameter {
         if(this.isInvalidParamters(param))
             param = defaultValue;
 
-        if(!(Number.isInteger(param) || Number.isSafeInteger(param)))
+        param = parseInt(param);
+
+        if(isNaN(param))
             throw new Error(`${param} is not integer value`);
 
-        return parseInt(param);
+        return param;
     }
 
     static getLowerCase(param, defaultValue = '') {
