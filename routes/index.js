@@ -13,10 +13,11 @@ function main(req,res){
     res.render('main');
 }
 
-function login(req,res){
+function login(req, res){
     res.render('login');
 }
-function signup(req,res){
+
+function signup(req, res){
     res.render('signup');
 }
 

@@ -1,12 +1,17 @@
 const HttpRequest = require('../utils/HttpRequest');
+const SocialFactory = require('./SocialFactory');
 
 const client_id = 'VxgHymo8VpJl3iyxveUB';
 const client_secret = '4gsd0DLvZp';
 const redirectURI = encodeURI("http://localhost:3000/member");
 
-class Naver {
+class Naver extends SocialFactory{
 
-    static async getProfile(accessToken) {
+    constructor() {
+        super();
+    }
+
+    async getProfile(accessToken) {
         let http = new HttpRequest();
         let profileApiUrl = 'https://openapi.naver.com/v1/nid/me';
         let header = {'Authorization': `Bearer ${accessToken}`};
@@ -16,10 +21,9 @@ class Naver {
         return await http.sendRequest(profileApiUrl, {}, 'GET');
     }
 
-    static async getAccessToken(code, state) {
+    async getAccessToken(code, state) {
         let http = new HttpRequest();
-        let url = 'https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id='
-            + client_id + '&client_secret=' + client_secret + '&redirect_uri=' + redirectURI + '&code=' + code + '&state=' + state;
+        let url = `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=${redirectURI}&code=${code}&state=${state}`;
         let header = {'X-Naver-Client-Id': client_id, 'X-Naver-Client-Secret': client_secret};
 
         http.setHeaders(header);

@@ -25,12 +25,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/api/auth', auth);
 
-// catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
+
+let Parameters = function (req, res, next) {
+    let parameters = {};
+    if(req.method == 'POST') {
+        parameters = req.body;
+    } else if(req.method == 'GET') {
+        parameters = req.query;
+    } else {
+        let err = new Error("ERROR IN MIDDLEWARE");
+        next(err);
+    }
+
+    req.parameter = parameters;
+    next();
+};
+app.use(Parameters);
 
 // error handler
 app.use(function(err, req, res, next) {
