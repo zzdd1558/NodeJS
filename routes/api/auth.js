@@ -8,11 +8,21 @@ const HttpResponse = require('../../utils/HttpResponse');
 const Parameter = require('../../utils/Parameter');
 const InputValidator = require('../../utils/InputValidator');
 
-router.get('/login', login);
-router.get('/social/:socialType/login', socialLogin);
+router.post('/login', login);
+router.post('/social/:socialType/login', socialLogin);
 
 function login(req, res) {
+    try {
+        let email = Parameter.getLowerCase(req.parameter['email']);
+        let password = Parameter.get(req.parameter['password']);
 
+        // TODO : email, password validation
+
+        // TODO : login
+
+    } catch (e) {
+        res.status(HttpResponse.StatusCode.UNEXPECTED).end();
+    }
 }
 
 function socialLogin(req, res) {

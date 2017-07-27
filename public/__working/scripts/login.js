@@ -33,8 +33,6 @@ $(document).ready(function () {
     $("#login_btn_facebook").click(function () {
         console.log("facebook");
         loginWithFacebook();
-
-
     });
 
     $("#login_btn_google").click(function () {
