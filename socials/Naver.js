@@ -3,7 +3,7 @@ const SocialFactory = require('./SocialFactory');
 
 const client_id = 'VxgHymo8VpJl3iyxveUB';
 const client_secret = '4gsd0DLvZp';
-const redirectURI = encodeURI("http://localhost:3000/member");
+const redirectURI = encodeURI("http://localhost:3000/social/naver/login");
 
 class Naver extends SocialFactory{
 

@@ -15,9 +15,8 @@ block content
             div.col-sm-6
                 form(action='/signup/createMember' method=post)
                     div.form-group
-                        label(for='id') 아이디
-                        input.form-control#id(type='password' placeholder='Enter ID')
-                        span  중복체크해서 보여줄 span 부분 비동기처리할부분
+                        label(for='email') 이메일
+                        input.form-control#email(type='email' placeholder='Enter Email')
                     div.form-group
                         label(for='password') 비밀번호
                         input.form-control#password(type='password' placeholder='Enter Password')
@@ -25,10 +24,7 @@ block content
                     div.form-group
                         label(for='password_confirm') 비밀번호 확인
                         input.form-control#password_confirm(type='password' placeholder='Enter PasswordConfirm')
-                    div.form-group
-                        label(for='email') 이메일
-                        input.form-control#email(type='email' placeholder='Enter Email')
-                        span  이메일 중복체크해서 보여줄 부분.
+
                     div.form-group
                         label 생년월일
                         div.row
