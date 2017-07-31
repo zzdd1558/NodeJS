@@ -8,6 +8,7 @@ router.get('/', main);
 router.get('/dbtest', dbtest);
 router.get('/signup',signup);
 router.get('/login',login);
+router.get('/naverToken',naverToken);
 
 function main(req,res){
     res.render('main');
@@ -39,5 +40,12 @@ async function dbtest(req, res) {
       res.status(HttpResponse.StatusCode.UNEXPECTED).end();
   }
 }
+
+function naverToken(req,res){
+    console.log(req);
+    res.render('naverToken');
+}
+
+
 
 module.exports = router;

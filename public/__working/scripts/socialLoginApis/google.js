@@ -2,9 +2,11 @@
  * Created by yunjin on 2017-07-20.
  */
 
-
+import socialTokenSendToPost from "../../../../utils/SocialTokenSendToPost.js";
+const socialToken = new socialTokenSendToPost();
 class GoogleLoginApi {
     startApp() {
+
         gapi.load('auth2', function () {
             // Retrieve the singleton for the GoogleAuth library and set up the client.
             let auth2 = gapi.auth2.init({
@@ -23,23 +25,24 @@ class GoogleLoginApi {
             function onSuccess(googleUser) {
                 var profile = googleUser.getBasicProfile();
                 console.log(googleUser.getAuthResponse().access_token);
-                //사용자에 대한 고유 ID 출력
-                console.log("ID: " + profile.getId());
+                socialToken.postSend('google',googleUser.getAuthResponse().access_token);
+                /*//사용자에 대한 고유 ID 출력
+                 console.log("ID: " + profile.getId());
 
-                //사용자의 '풀네임'을 출력
-                console.log('Full Name: ' + profile.getName());
+                 //사용자의 '풀네임'을 출력
+                 console.log('Full Name: ' + profile.getName());
 
-                //사용자의 '이름' 출력
-                console.log('Given Name: ' + profile.getGivenName());
+                 //사용자의 '이름' 출력
+                 console.log('Given Name: ' + profile.getGivenName());
 
-                //사용자의 '성' 출력
-                console.log('Family Name: ' + profile.getFamilyName());
+                 //사용자의 '성' 출력
+                 console.log('Family Name: ' + profile.getFamilyName());
 
-                //사용자의 이미지 URL 주소 출력
-                console.log("Image URL: " + profile.getImageUrl());
+                 //사용자의 이미지 URL 주소 출력
+                 console.log("Image URL: " + profile.getImageUrl());
 
-                //사용자의 google 계정 Email을 출력
-                console.log("Email: " + profile.getEmail());
+                 //사용자의 google 계정 Email을 출력
+                 console.log("Email: " + profile.getEmail());*/
 
             }, function (error) {
                 alert(JSON.stringify(error, undefined, 2));

@@ -5,17 +5,18 @@ import "../styles/login.css";
 import "./common.js";
 import googleLoginApi from "./socialLoginApis/google.js";
 import naverLoginApi from "./socialLoginApis/naver.js";
+import socialTokenSendToPost from "../../../utils/SocialTokenSendToPost.js";
 import "./socialLoginApis/facebook.js";
 import '../img/login/facebook.png';
 import '../img/login/google.png';
 import '../img/login/kakao.png';
 import '../img/login/naver.png';
 
+const socialToken = new socialTokenSendToPost();
 const google = new googleLoginApi();
-
 let naver_id_login;
 $(document).ready(function () {
-    console.log(window.location.href);
+
     Kakao.init('0e34b26f5967894741aa1e4f97e1537b');
     loginWithNaver();
     //kakao Login 부분
@@ -30,6 +31,7 @@ $(document).ready(function () {
 
     $("#naver_id_login").click(function () {
         console.log("naver");
+
     });
 
     $("#login_btn_facebook").click(function () {
@@ -44,35 +46,13 @@ $(document).ready(function () {
     });
 });
 
-
 function loginWithKakao() {
     Kakao.Auth.login({
         success: function (authObj) {
             // 로그인 성공시, API를 호출합니다.
             //token 정보
-            console.log("kakao : " + authObj.access_token);
-
-            $.post("http://localhost:3000/api/auth/social/kakao/login",
-                {
-                    accessToken: authObj.access_token
-                },
-                function (data, status) {
-                    alert("\nStatus: " + status);
-
-                }
-            );
-
-            /*Kakao.API.request({
-             url: '/v1/user/me',
-             success: function (res) {
-             //로그인 회원의 이메일 , 닉네임 ,
-             console.log("1 : " + res.kaccount_email);
-             console.log("2 : " + res.properties.nickname);
-             },
-             fail: function (error) {
-             alert(JSON.stringify(error));
-             }
-             });*/
+            console.log("success kakao : " + authObj.access_token);
+            socialToken.postSend("kakao",authObj.access_token);
         },
         fail: function (err) {
             alert(JSON.stringify(err));
@@ -83,7 +63,8 @@ function loginWithKakao() {
 
 
 function loginWithNaver() {
-    naver_id_login = new naverLoginApi("VxgHymo8VpJl3iyxveUB", "http://localhost:3000/login");
+    //code와 state의 리다이렉트 경로
+    naver_id_login = new naverLoginApi("VxgHymo8VpJl3iyxveUB", "http://localhost:3000/naverToken");
     let state = naver_id_login.getUniqState();
     naver_id_login.response_type = "code";
     naver_id_login.setButton("green", 3, 40);
@@ -95,23 +76,12 @@ function loginWithNaver() {
 function loginWithFacebook() {
     FB.login(function (response) {
         if (response.authResponse) {
-            let access_token = response.authResponse.accessToken; //get access token
-            // let user_id = response.authResponse.userID; //get FB UID
-
             //Facebook Login User access_token
-            // console.log('Facebook access_token = ' + access_token);
+            let access_token = response.authResponse.accessToken; //get access token
 
             //Facebook Login User user_id
-            // console.log('Facebook user_id = ' + user_id);
-            $.post("http://localhost:3000/api/auth/social/facebook/login",
-                {
-                    accessToken: access_token
-                },
-                function (data, status) {
-                    alert("\nStatus: " + status);
-
-                }
-            );
+            // let user_id = response.authResponse.userID; //get FB UID
+            socialToken.postSend("facebook" , access_token);
         }
     }, {
         scope: 'email,public_profile,user_birthday',
@@ -128,3 +98,15 @@ function getUserData() {
 
     });
 }
+function postSend( social , access_token){
+    $.post("http://localhost:3000/api/auth/social/"+ social + "/login",
+        {
+            accessToken: access_token
+        },
+        function (data, status) {
+            alert("\nStatus: " + status);
+
+        }
+    );
+}
+
