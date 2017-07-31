@@ -6,7 +6,8 @@ module.exports = {
     entry: {
         login:  './public/__working/scripts/login.js',
         signup: './public/__working/scripts/signup.js',
-        main: './public/__working/scripts/main.js'
+        main: './public/__working/scripts/main.js',
+        naverTest:'./public/__working/scripts/naverTest.js'
     },
     output: {
         path: __dirname + '/public/scripts',
