@@ -1,15 +1,10 @@
 const HttpRequest = require('../utils/HttpRequest');
-const SocialFactory = require('./SocialFactory');
 
 const client_id = 'VxgHymo8VpJl3iyxveUB';
 const client_secret = '4gsd0DLvZp';
 const redirectURI = encodeURI("http://localhost:3000/social/naver/login");
 
-class Naver extends SocialFactory{
-
-    constructor() {
-        super();
-    }
+class Naver {
 
     async getProfile(accessToken) {
         let http = new HttpRequest();

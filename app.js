@@ -23,15 +23,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/api/auth', auth);
-
-app.use(function(req, res, next) {
-  let err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
 let Parameters = function (req, res, next) {
     let parameters = {};
     if(req.method == 'POST') {
@@ -47,6 +38,17 @@ let Parameters = function (req, res, next) {
     next();
 };
 app.use(Parameters);
+
+app.use('/', index);
+app.use('/api/auth', auth);
+
+app.use(function(req, res, next) {
+  let err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+
 
 // error handler
 app.use(function(err, req, res, next) {

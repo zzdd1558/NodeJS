@@ -42,7 +42,6 @@ async function dbtest(req, res) {
 }
 
 function naverToken(req,res){
-    console.log(req);
     res.render('naverToken');
 }
 

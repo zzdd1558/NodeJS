@@ -9,7 +9,7 @@ let naver_id_login;
 naverTest();
 $(document).ready(function(){
     alert("Abc");
-})
+});
 
 function naverTest() {
     //code와 state의 리다이렉트 경로

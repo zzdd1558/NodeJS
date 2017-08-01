@@ -2,8 +2,6 @@
  * Created by yunjin on 2017-07-20.
  */
 
-import socialTokenSendToPost from "../../../../utils/SocialTokenSendToPost.js";
-const socialToken = new socialTokenSendToPost();
 class GoogleLoginApi {
     startApp() {
 
@@ -25,8 +23,8 @@ class GoogleLoginApi {
         auth2.attachClickHandler(element, {},
             function onSuccess(googleUser) {
                 var profile = googleUser.getBasicProfile();
-                console.log(googleUser.getAuthResponse().access_token);
-                socialToken.postSend('google',googleUser.getAuthResponse().access_token);
+
+                postSend('google',googleUser.getAuthResponse().access_token);
                 /*//사용자에 대한 고유 ID 출력
                  console.log("ID: " + profile.getId());
 

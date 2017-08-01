@@ -5,14 +5,12 @@ import "../styles/login.css";
 import "./common.js";
 import googleLoginApi from "./socialLoginApis/google.js";
 import naverLoginApi from "./socialLoginApis/naver.js";
-import socialTokenSendToPost from "../../../utils/SocialTokenSendToPost.js";
 import "./socialLoginApis/facebook.js";
 import '../img/login/facebook.png';
 import '../img/login/google.png';
 import '../img/login/kakao.png';
 import '../img/login/naver.png';
 
-const socialToken = new socialTokenSendToPost();
 const google = new googleLoginApi();
 let naver_id_login;
 $(document).ready(function () {
@@ -52,7 +50,7 @@ function loginWithKakao() {
             // 로그인 성공시, API를 호출합니다.
             //token 정보
             console.log("success kakao : " + authObj.access_token);
-            socialToken.postSend("kakao",authObj.access_token);
+            postSend("kakao",authObj.access_token);
         },
         fail: function (err) {
             alert(JSON.stringify(err));
@@ -81,7 +79,7 @@ function loginWithFacebook() {
 
             //Facebook Login User user_id
             // let user_id = response.authResponse.userID; //get FB UID
-            socialToken.postSend("facebook" , access_token);
+            postSend("facebook" , access_token);
         }
     }, {
         scope: 'email,public_profile,user_birthday',
@@ -99,7 +97,7 @@ function getUserData() {
     });
 }
 function postSend( social , access_token){
-    $.post("http://localhost:3000/api/auth/social/"+ social + "/login",
+    $.post(`/api/auth/social/${social}/login`,
         {
             accessToken: access_token
         },
