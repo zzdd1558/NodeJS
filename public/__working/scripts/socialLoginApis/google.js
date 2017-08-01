@@ -21,6 +21,7 @@ class GoogleLoginApi {
 
     static attachSignin(element, auth2) {
         console.log(element.id);
+        console.log(auth2);
         auth2.attachClickHandler(element, {},
             function onSuccess(googleUser) {
                 var profile = googleUser.getBasicProfile();
