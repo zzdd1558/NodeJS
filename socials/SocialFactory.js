@@ -30,6 +30,9 @@ class SocialFactory {
         return await this.social.getProfile(accessToken);
     }
 
+    getLoginUrl() {
+        return this.social.getLoginUrl();
+    }
 }
 
 const SocialType = {

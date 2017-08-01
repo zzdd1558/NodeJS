@@ -1,4 +1,6 @@
 const HttpRequest = require('../utils/HttpRequest');
+const clientId = '393277494210-pefadhtq8di5fqcfooo6hghp60fvjfeu.apps.googleusercontent.com';
+
 
 class Google {
 
@@ -12,6 +14,9 @@ class Google {
         return await http.sendRequest(profileApiUrl, {}, 'GET');
     }
 
+    getLoginUrl() {
+
+    }
 }
 
 module.exports = Google;
