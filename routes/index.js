@@ -8,7 +8,7 @@ router.get('/', main);
 router.get('/dbtest', dbtest);
 router.get('/signup',signup);
 router.get('/login',login);
-router.get('/naverToken',naverToken);
+router.get('/naver/login/redirect', naverRedirect);
 
 function main(req,res){
     res.render('main');
@@ -41,7 +41,7 @@ async function dbtest(req, res) {
   }
 }
 
-function naverToken(req,res){
+function naverRedirect(req,res){
     res.render('naverToken');
 }
 
