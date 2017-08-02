@@ -1,7 +1,7 @@
 const HttpRequest = require('../utils/HttpRequest');
 const SocialService = require('./SocialService');
 const appId = '1885966198315995';
-const clientSecret = '';
+const clientSecret = '4834c734b570b6c044455509070eeaf9';
 
 class Facebook extends SocialService{
 
@@ -18,7 +18,8 @@ class Facebook extends SocialService{
 
     async getAccessToken(code) {
         let http = new HttpRequest();
-        let tokenUrl = `https://graph.facebook.com/access_token?client_id=${appId}&redirect_uri=${this.redirectUrl}&client_secret=${clientSecret}&code=${code}`;
+        //token url에 /oauth/가 빠져있었음.
+        let tokenUrl = `https://graph.facebook.com/oauth/access_token?client_id=${appId}&redirect_uri=${this.redirectUrl}&client_secret=${clientSecret}&code=${code}`;
 
         let result = await http.sendRequest(tokenUrl, {}, 'GET');
         let accessToken = result.access_token;

@@ -1,9 +1,9 @@
 const HttpRequest = require('../utils/HttpRequest');
 const SocialService = require('./SocialService');
 const clientId = '393277494210-pefadhtq8di5fqcfooo6hghp60fvjfeu.apps.googleusercontent.com';
-const clientSecret = '';
+const clientSecret = 'pDzSJJ9KBqeNkWiCAg76zhwP';
 
-class Google extends SocialService{
+class Google extends SocialService {
 
     constructor(socialType) {
         super(socialType);
@@ -23,11 +23,11 @@ class Google extends SocialService{
         let http = new HttpRequest();
         let tokenUrl = 'https://www.googleapis.com/oauth2/v4/token';
         let params = {
-            code : code,
-            client_id : clientId,
-            client_secret : clientSecret,
-            redirect_uri : this.redirectUrl,
-            grant_type : 'authorization_code'
+            code: code,
+            client_id: clientId,
+            client_secret: clientSecret,
+            redirect_uri: this.redirectUrl,
+            grant_type: 'authorization_code'
         };
 
         let result = await http.sendRequest(tokenUrl, params);
@@ -37,8 +37,9 @@ class Google extends SocialService{
     }
 
     getLoginUrl() {
-        return `https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.metadata.readonly&access_type=offline
-        &redirect_uri=${this.redirectUrl}&response_type=code&client_id=${clientId}&state=${this.state}`;
+        //&approval_prompt=force 추가함 다만 에러가뜸 ..
+        return `https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.metadata.readonly&access_type=offline&
+approval_prompt=force&redirect_uri=${this.redirectUrl}&response_type=code&client_id=${clientId}&state=${this.state}`;
     }
 }
 

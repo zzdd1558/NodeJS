@@ -63,10 +63,9 @@ async function socialAuth(req, res){
         let socialType = Parameter.getLowerCase(req.params.socialType);
         let code = Parameter.get(req.parameter['code']);
         let state = Parameter.get(req.parameter['state']);
-
         let social = new Social(socialType);
-        let accessToken = await social.getAccessToken(code, state);
 
+        let accessToken = await social.getAccessToken(code, state);
         res.render('socialRedirect', {accessToken : accessToken, social : socialType});
     } catch(e) {
         console.log(e.message);

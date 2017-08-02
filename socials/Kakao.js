@@ -1,7 +1,7 @@
 const HttpRequest = require('../utils/HttpRequest');
 const SocialService = require('./SocialService');
-const app_key = '0e34b26f5967894741aa1e4f97e1537b';
-const clientSecret = '';
+const app_key = '3dda084309bc6dc8ef9ff2b00dfbab94';
+const clientSecret = 'LX2muWmBB4Zp4JdvOCaF6Eno8xf3k2tZ';
 
 class Kakao extends SocialService{
 
