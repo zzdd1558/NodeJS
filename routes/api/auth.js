@@ -42,9 +42,10 @@ async function socialLogin(req, res) {
         let user = await social.getProfile(accessToken);
 
         // TODO : db
+        // TODO : create jwt Token
 
         console.log(user);
-        res.status(HttpResponse.StatusCode.OK).end();
+        res.render('main', {/** jwt Token **/});
     }
     catch (e) {
         console.log(e.message);

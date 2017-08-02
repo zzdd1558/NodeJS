@@ -67,7 +67,7 @@ async function socialAuth(req, res){
         let social = new Social(socialType);
         let accessToken = await social.getAccessToken(code, state);
 
-        res.render('socialRedirect', {accessToken : encodeURI(accessToken)});
+        res.render('socialRedirect', {accessToken : accessToken, social : socialType});
     } catch(e) {
         console.log(e.message);
         res.status(HttpResponse.StatusCode.UNEXPECTED).end();
