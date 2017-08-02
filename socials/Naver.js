@@ -2,7 +2,7 @@ const HttpRequest = require('../utils/HttpRequest');
 
 const client_id = 'VxgHymo8VpJl3iyxveUB';
 const client_secret = '4gsd0DLvZp';
-const redirectURI = encodeURI("http://localhost:3000/social/naver/login");
+const redirectURI = encodeURI("http://localhost:3000/social/naver/auth");
 
 class Naver {
 

@@ -9,7 +9,7 @@ window.fbAsyncInit = function () {
         version: 'v2.10'
 
     });
-    // console.log("init success");
+
     FB.AppEvents.logPageView();
 };
 
@@ -22,5 +22,5 @@ window.fbAsyncInit = function () {
     js.id = id;
     js.src = "//connect.facebook.net/en_US/sdk.js";
     fjs.parentNode.insertBefore(js, fjs);
-    // console.log("connect success");
+
 }(document, 'script', 'facebook-jssdk'));

@@ -20,7 +20,6 @@ class HttpRequest {
     }
 
     setHeaders(header) {
-        console.log("Abc");
         this.options.headers = header;
     }
 

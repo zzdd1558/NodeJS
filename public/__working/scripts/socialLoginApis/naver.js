@@ -230,6 +230,7 @@ var naver_id_login = function (client_id,redirect_uri)
             naver_id_login_contents="<a href='"+naver_id_login_url+"' "+naver_id_popup_option+" id='naver_id_login_anchor'><img src='../img/naver.png' border='0' title='네이버 아이디로 로그인'></a> ";
         }
         naver_id_login.innerHTML=naver_id_login_contents;
+
         if (this.is_callback)
         {
             this.init_naver_id_login_callback();

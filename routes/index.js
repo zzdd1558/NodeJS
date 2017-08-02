@@ -8,7 +8,7 @@ router.get('/', main);
 router.get('/dbtest', dbtest);
 router.get('/signup',signup);
 router.get('/login',login);
-router.get('/naver/login/redirect', naverRedirect);
+router.get('/social/naver/auth', naverRedirect);
 
 function main(req,res){
     res.render('main');
