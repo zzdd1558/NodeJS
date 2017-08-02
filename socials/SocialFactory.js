@@ -1,25 +1,27 @@
+/**
+ * Created by parkjp on 2017-08-02.
+ */
 
 const naver = require('./Naver');
 const facebook = require('./Facebook');
 const google = require('./Google');
 const kakao = require('./Kakao');
+const SocialType = require('./SocialService').socialType;
 
 class SocialFactory {
-
     constructor(socialType) {
-        this.socialType = socialType;
-        switch (this.socialType) {
+        switch (socialType) {
             case SocialType.NAVER :
-                this.social = new naver();
+                this.social = new naver(socialType);
                 break;
             case SocialType.GOOGLE :
-                this.social = new google();
+                this.social = new google(socialType);
                 break;
             case SocialType.FACEBOOK :
-                this.social = new facebook();
+                this.social = new facebook(socialType);
                 break;
             case SocialType.KAKAO :
-                this.social = new kakao();
+                this.social = new kakao(socialType);
                 break;
             default :
                 throw new Error('SocialType Error');
@@ -30,17 +32,13 @@ class SocialFactory {
         return await this.social.getProfile(accessToken);
     }
 
+    async getAccessToken(code, state) {
+        return await this.social.getAccessToken(code, state);
+    }
+
     getLoginUrl() {
         return this.social.getLoginUrl();
     }
 }
 
-const SocialType = {
-    NAVER : 'naver',
-    FACEBOOK : 'facebook',
-    GOOGLE : 'google',
-    KAKAO : 'kakao'
-};
-
 module.exports = SocialFactory;
-module.exports.socialType = SocialType;

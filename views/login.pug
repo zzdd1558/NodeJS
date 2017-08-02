@@ -2,10 +2,10 @@ extends layout
 block header
     link(rel='stylesheet', href='styles/login.bundle.css')
 
-    script(src="https://apis.google.com/js/api:client.js")
-    meta(name="google-signin-scope" content="profile email")
-    meta(name="google-signin-client_id" content="393277494210-pefadhtq8di5fqcfooo6hghp60fvjfeu.apps.googleusercontent.com")
-    script(src='//developers.kakao.com/sdk/js/kakao.min.js')
+    //script(src="https://apis.google.com/js/api:client.js")
+    //meta(name="google-signin-scope" content="profile email")
+    //meta(name="google-signin-client_id" content="393277494210-pefadhtq8di5fqcfooo6hghp60fvjfeu.apps.googleusercontent.com")
+    //script(src='//developers.kakao.com/sdk/js/kakao.min.js')
     script(src='./scripts/login.bundle.js')
 
 block content
@@ -15,16 +15,16 @@ block content
             div.col-sm-6.login_btn_container
 
                 //Facebook 로그인 button
-                button.login_btn.login_btn_facebook#login_btn_facebook
+                button.login_btn.login_btn_facebook#facebook(button-type="social")
                 br
                 //Google 로그인 button
-                button.login_btn.login_btn_google#login_btn_google
+                button.login_btn.login_btn_google#google(button-type="social")
                 br
                 //Kakao 로그인 button
-                button.login_btn.login_btn_kakao#login_btn_kakao
+                button.login_btn.login_btn_kakao#kakao(button-type="social")
                 br
                 //Naver 로그인 button
-                div.login_btn_naver#naver_id_login
+                button.login_btn.login_btn_naver#naver(button-type="social")
             div.col-sm-6
                 form
                     div.form-group

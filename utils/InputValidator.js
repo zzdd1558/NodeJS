@@ -1,4 +1,4 @@
-const socialType = require('../socials/SocialFactory').socialType;
+const socialType = require('../socials/SocialService').socialType;
 
 class InputValidator {
 
