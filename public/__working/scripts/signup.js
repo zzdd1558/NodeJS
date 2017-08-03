@@ -13,6 +13,31 @@ $(document).ready(function () {
         setSelectDays(month);
     });
 
+
+    /** keypress 될때마다 ajax로 아이디 검사*/
+    $("#email").blur(function(){
+        let email = $("#email").val();
+        console.log(email);
+        $.ajax({
+            type : 'POST',
+            url : '/signup/emailCheck',
+            data : {
+                'email' : email
+            },
+            success : function(data){
+                console.log(data);
+            },
+            error : function(){
+                alert("실패");
+            }
+        })
+    });
+
+
+    /** keypress 될때마다 password 와 passwordConfirm이 일치하는지 비교 */
+
+
+
     setYear();
     setMonth();
     setSelectDays(currentDate.month);

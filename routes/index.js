@@ -10,6 +10,8 @@ router.get('/', main);
 router.get('/dbtest', dbtest);
 router.get('/signup',signup);
 router.get('/login',login);
+router.get('/signup/createMember',createMember);
+router.post('/signup/emailCheck' , emailCheck);
 router.get('/social/:socialType/login', socialLogin);
 router.get('/social/:socialType/auth', socialAuth);
 
@@ -21,9 +23,7 @@ function login(req, res){
     res.render('login');
 }
 
-function signup(req, res){
-    res.render('signup');
-}
+
 
 async function dbtest(req, res) {
   try {
@@ -74,5 +74,68 @@ async function socialAuth(req, res){
 }
 
 
+async function createMember(req, res){
+    try {
+        let userEmail = Parameter.get(req.parameter['email']);
+        let userPassword = Parameter.get(req.parameter['password']);
+        let userNickname = Parameter.get(req.parameter['nickname']);
+        let userYear = Parameter.get(req.parameter['year']);
+        let userMonth = Parameter.get(req.parameter['month']);
+        let userDate = Parameter.get(req.parameter['date']);
+        let userBirth = userYear + "-" + userMonth + "-" + userDate;
+
+        /** 데이터 넘어오는지 값 찍어보는 부분 */
+        console.log("email : " + userEmail);
+        console.log("userPassword : " + userPassword);
+        console.log("userNickname : " + userNickname);
+        console.log("userBirth : " + userBirth);
+
+        let query = `insert into user values (
+        NULL,
+        '${userNickname}',
+        '${userPassword}',
+        '${userEmail}',
+        NULL,
+        '${userBirth}' , NULL,NULL,NULL,NULL
+        )`;
+
+
+        let result = await Database.call(query); // async, await 방식
+
+        res.status(HttpResponse.StatusCode.OK).send(result);
+    } catch(e) {
+        console.log(e.message);
+        res.status(HttpResponse.StatusCode.UNEXPECTED).end();
+    }
+}
+
+/** 회원가입 페이지 */
+function signup(req, res){
+
+
+    res.render('signup');
+}
+
+
+async function emailCheck(req,res){
+    try {
+        let resultDate='fail';
+        let userEmail = req.parameter['email'];
+
+        let query = `select count(*) as emailIsEmpty from user where userEmail = '${userEmail}'`;
+        let result = await Database.call(query); // async, await 방식*!/
+
+        if(result[0].emailIsEmpty >0){
+            resultDate = 'success';
+        }
+
+
+
+        res.status(HttpResponse.StatusCode.OK).send(resultDate);
+    } catch(e) {
+        console.log(e.message);
+        res.status(HttpResponse.StatusCode.UNEXPECTED).end();
+    }
+}
 
 module.exports = router;
