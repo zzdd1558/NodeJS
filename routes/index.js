@@ -10,7 +10,7 @@ router.get('/', main);
 router.get('/dbtest', dbtest);
 router.get('/signup',signup);
 router.get('/login',login);
-router.get('/signup/createMember',createMember);
+router.post('/signup/createMember',createMember);
 router.post('/signup/emailCheck' , emailCheck);
 router.get('/social/:socialType/login', socialLogin);
 router.get('/social/:socialType/auth', socialAuth);
@@ -19,9 +19,16 @@ function main(req,res){
     res.render('main');
 }
 
+/** 로그인 페이지 */
 function login(req, res){
     res.render('login');
 }
+
+/** 회원가입 페이지 */
+function signup(req, res){
+    res.render('signup');
+}
+
 
 
 
@@ -102,31 +109,23 @@ async function createMember(req, res){
 
         let result = await Database.call(query); // async, await 방식
 
-        res.status(HttpResponse.StatusCode.OK).send(result);
+        res.redirect('/');
     } catch(e) {
         console.log(e.message);
         res.status(HttpResponse.StatusCode.UNEXPECTED).end();
     }
 }
 
-/** 회원가입 페이지 */
-function signup(req, res){
-
-
-    res.render('signup');
-}
-
-
 async function emailCheck(req,res){
     try {
-        let resultDate='fail';
+        let resultDate='success';
         let userEmail = req.parameter['email'];
 
         let query = `select count(*) as emailIsEmpty from user where userEmail = '${userEmail}'`;
         let result = await Database.call(query); // async, await 방식*!/
 
         if(result[0].emailIsEmpty >0){
-            resultDate = 'success';
+            resultDate = 'fail';
         }
 
 

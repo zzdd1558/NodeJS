@@ -5,7 +5,7 @@ const config = {
     port : '3306',
     user : 'root',
     password : '1q2w3e4r!@',
-    database : 'member'
+    database : 'blog'
 };
 
 const pool = mysql.createPool(config);

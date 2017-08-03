@@ -13,38 +13,30 @@ block content
                     div.col-sm-12
                         //img(src='/images/image.jpg')
             div.col-sm-6
-                form(action='/signup/createMember' method=post)
-                    div.form-group
+                form( action='/signup/createMember' method='post')
+                    div.form-group#emailGroup
                         label(for='email') 이메일
-                        input.form-control#email(type='email' placeholder='Enter Email')
+                        input.form-control#email(type='email' placeholder='Enter Email' name='email')
                     div.form-group
                         label(for='password') 비밀번호
-                        input.form-control#password(type='password' placeholder='Enter Password')
-                        span 비밀번호 체크해서 보여줄 span 부분
+                        input.form-control#password(type='password' placeholder='Enter Password' name='password')
+                    div.form-group#passwordGroup
+                        label(for='passwordConfirm') 비밀번호 확인
+                        input.form-control#passwordConfirm(type='password' placeholder='Enter PasswordConfirm')
                     div.form-group
-                        label(for='password_confirm') 비밀번호 확인
-                        input.form-control#password_confirm(type='password' placeholder='Enter PasswordConfirm')
-
+                        label(for='email') 닉네임
+                        input.form-control#nickname(type='text' placeholder='Enter Email' name='nickname')
                     div.form-group
                         label 생년월일
                         div.row
                             div.col-sm-4(style="margin-bottom:5px;")
-                                select.form-control#year
+                                select.form-control#year(name='year')
                             div.col-sm-4(style="margin-bottom:5px;")
-                                select.form-control#month
+                                select.form-control#month(name='month')
                             div.col-sm-4(style="margin-bottom:5px;")
-                                select.form-control#date
-                    div.form-group
-                        label 성별
-                        div.row(style="text-align:center")
-                            div.col-sm-6
-                                label.radio-inline
-                                input(type='radio' value='m')#man
-                                | 남자
-                            div.col-sm-6
-                                label.radio-inline
-                                input(type='radio')#women
-                                | 여자
+                                select.form-control#date(name='date')
+                        div.row(style="margin-top:5px; text-align:center;")
+                            a(href="#" data-toggle="tooltip" data-placement="bottom" title="생일 알림 기능을 위한 수집") 생년월일 정보 수집이유
                     hr
                     div.form-group
                         div.col-sm-4.col-sm-offset-9
