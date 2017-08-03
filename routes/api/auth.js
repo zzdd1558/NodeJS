@@ -8,6 +8,7 @@ const HttpResponse = require('../../utils/HttpResponse');
 const Parameter = require('../../utils/Parameter');
 const InputValidator = require('../../utils/InputValidator');
 const HttpRequest = require('../../utils/HttpRequest');
+const JWT = require('../../utils/JsonWebToken');
 
 const request = new HttpRequest();
 router.post('/login', login);
