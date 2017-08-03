@@ -18,7 +18,6 @@ class Facebook extends SocialService{
 
     async getAccessToken(code) {
         let http = new HttpRequest();
-        //token url에 /oauth/가 빠져있었음.
         let tokenUrl = `https://graph.facebook.com/oauth/access_token?client_id=${appId}&redirect_uri=${this.redirectUrl}&client_secret=${clientSecret}&code=${code}`;
 
         let result = await http.sendRequest(tokenUrl, {}, 'GET');

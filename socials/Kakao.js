@@ -33,7 +33,7 @@ class Kakao extends SocialService{
             client_secret : clientSecret
         };
 
-        let result = await http.sendRequest(tokenUrl, params)
+        let result = await http.sendRequest(tokenUrl, params);
         let accessToken = result.access_token;
 
         return accessToken;

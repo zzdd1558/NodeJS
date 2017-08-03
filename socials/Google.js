@@ -37,9 +37,8 @@ class Google extends SocialService {
     }
 
     getLoginUrl() {
-        //&approval_prompt=force 추가함 다만 에러가뜸 ..
-        return `https://accounts.google.com/o/oauth2/v2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.metadata.readonly&access_type=offline&
-approval_prompt=force&redirect_uri=${this.redirectUrl}&response_type=code&client_id=${clientId}&state=${this.state}`;
+        return `https://accounts.google.com/o/oauth2/v2/auth?scope=profile email&access_type=offline&
+        approval_prompt=force&redirect_uri=${this.redirectUrl}&response_type=code&client_id=${clientId}&state=${this.state}`;
     }
 }
 
