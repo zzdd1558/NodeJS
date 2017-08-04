@@ -1,9 +1,9 @@
 extends layout
 
 block header
-    script(src='scripts/signup.bundle.js')
+    script(src='/scripts/signup.bundle.js')
 
-    link(rel='stylesheet', href='styles/login.bundle.css')
+    link(rel='stylesheet', href='/styles/login.bundle.css')
 block content
     h1 회원가입
     div.container(style="max-width:1000px")
@@ -13,13 +13,13 @@ block content
                     div.col-sm-12
                         //img(src='/images/image.jpg')
             div.col-sm-6
-                form( action='/signup/createMember' method='post')
+                form#userForm( action='/api/signup/createMember' method='post')
                     div.form-group#emailGroup
                         label(for='email') 이메일
-                        input.form-control#email(type='email' placeholder='Enter Email' name='email')
+                        input.form-control#email(type='email' placeholder='email 형식에 맞게 입력  ' name='email')
                     div.form-group
                         label(for='password') 비밀번호
-                        input.form-control#password(type='password' placeholder='Enter Password' name='password')
+                        input.form-control#password(type='password' placeholder='영문,숫자,특수문자 8~16자' name='password')
                     div.form-group#passwordGroup
                         label(for='passwordConfirm') 비밀번호 확인
                         input.form-control#passwordConfirm(type='password' placeholder='Enter PasswordConfirm')
