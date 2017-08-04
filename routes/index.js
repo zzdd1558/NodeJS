@@ -9,7 +9,7 @@ const Social = require('../socials/SocialFactory');
 router.get('/', main);
 router.get('/dbtest', dbtest);
 router.get('/login',login);
-
+router.get('/signup', signup);
 router.get('/social/:socialType/login', socialLogin);
 router.get('/social/:socialType/auth', socialAuth);
 
@@ -22,6 +22,10 @@ function login(req, res){
     res.render('login');
 }
 
+
+function signup(req,res){
+    res.render('signup');
+}
 
 
 

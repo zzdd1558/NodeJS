@@ -30,26 +30,20 @@ $(document).ready(function () {
         let passwordValue = password.val();
         let validatorCheck = false;
 
-        /** 이메일 정규식 확인 */
-        let emailRegResult = InputValidator.isValidEmail(emailValue);
-
-        /** 비밀번호 정규식 확인 */
-        let passwordRegResult = InputValidator.isValidPassword(passwordValue)
-
-        if(!emailRegResult || !booleanEmailCheck){
+        if(!InputValidator.isValidEmail(emailValue) || !booleanEmailCheck){
             email.focus();
-        }else if (!passwordRegResult){
+        }else if (!InputValidator.isValidPassword(passwordValue)){
             password.focus();
-        }else if( emailRegResult && passwordRegResult && booleanEmailCheck){
+        }else if( InputValidator.isValidEmail(emailValue) && InputValidator.isValidPassword(passwordValue) && booleanEmailCheck){
             validatorCheck = true;
         }
         //코드 부분에 에러가 있다면 false라도 전송이된다.
         return validatorCheck;
-    })
+    });
 
     /** blur 될때마다 ajax로 아이디 검사*/
     $("#email").blur(function () {
-        emailCheck1();
+        emailCheck();
     });
 
     /** passwordConfirm이 blur 될때마다 password 와 passwordConfirm이 일치하는지 비교 */
@@ -63,13 +57,13 @@ $(document).ready(function () {
 });
 
 /** 이메일 check*/
-function emailCheck1() {
+function emailCheck() {
     $('#emailSpan').remove();
     let email = $("#email").val();
     if (InputValidator.isValidEmail(email)) {
         $.ajax({
             type: 'POST',
-            url: './emailCheck',
+            url: './api/auth/email-check',
             data: {
                 'email': email
             },
@@ -84,7 +78,7 @@ function emailCheck1() {
             error: function () {
                 alert("실패");
             }
-        })
+        });
     } else {
         $("#emailGroup").append("<p id='emailSpan'><span id='emailSpan' class='text-danger'><strong>사용 불가능한 이메일 주소 입니다.</strong></span></p>");
     }
@@ -151,6 +145,6 @@ function setSelectDays(month = currentDate.month) {
         }else{
             ii=i;
         }
-        $("select#date").append("<option " + checkSelect + " value='" + i + "'>" + i + "일</option>");
+        $("select#date").append("<option " + checkSelect + " value='" + ii + "'>" + i + "일</option>");
     }
 }

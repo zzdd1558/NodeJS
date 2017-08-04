@@ -13,7 +13,7 @@ block content
                     div.col-sm-12
                         //img(src='/images/image.jpg')
             div.col-sm-6
-                form#userForm( action='/api/signup/createMember' method='post')
+                form#userForm( action='/api/auth/signup' method='post')
                     div.form-group#emailGroup
                         label(for='email') 이메일
                         input.form-control#email(type='email' placeholder='email 형식에 맞게 입력  ' name='email')

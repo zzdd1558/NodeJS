@@ -9,8 +9,6 @@ const index = require('./routes/index');
 
 const auth = require('./routes/api/auth');
 
-const userSignUp = require('./routes/api/userSignUp');
-
 const app = express();
 
 // view engine setup
@@ -43,7 +41,6 @@ app.use(Parameters);
 
 app.use('/', index);
 app.use('/api/auth', auth);
-app.use('/api/signUp', userSignUp);
 
 app.use(function(req, res, next) {
   let err = new Error('Not Found');
