@@ -7394,4 +7394,6 @@ body {
     }
 }
 
-
+.none-span{
+    display: none;
+}

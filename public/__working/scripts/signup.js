@@ -58,7 +58,7 @@ $(document).ready(function () {
 
 /** 이메일 check*/
 function emailCheck() {
-    $('#emailSpan').remove();
+    $('.email-span').css('display','none');
     let email = $("#email").val();
     if (InputValidator.isValidEmail(email)) {
         $.ajax({
@@ -69,10 +69,10 @@ function emailCheck() {
             },
             success: function (data) {
                 if (data === 'success') {
-                    $("#emailGroup").append("<p id='emailSpan'><span  class='text-success'><strong>사용 가능한 이메일 주소 입니다.</strong></span></p>");
+                    $('#emailUsed').css('display' , 'block');
                     booleanEmailCheck = true;
                 } else {
-                    $("#emailGroup").append("<p id='emailSpan'><span id='emailSpan' class='text-danger'><strong>존재하는 이메일 주소 입니다.</strong></span></p>");
+                    $('#emailOverlap').css('display' , 'block');
                 }
             },
             error: function () {
@@ -80,23 +80,24 @@ function emailCheck() {
             }
         });
     } else {
-        $("#emailGroup").append("<p id='emailSpan'><span id='emailSpan' class='text-danger'><strong>사용 불가능한 이메일 주소 입니다.</strong></span></p>");
+        $('#emailNotUsed').css('display' , 'block');
     }
 }
 
 /** 비밀번호 check*/
 function passwordCheck() {
-    $("#passwordCheck").remove();
+    $(".password-span").css('display','none');
     let password = $("#password").val();
     let passwordConfirm = $("#passwordConfirm").val();
     if ((InputValidator.isValidPassword(password) || InputValidator.isValidPassword(passwordConfirm))){
         if (password != passwordConfirm) {
-            $('#passwordGroup').append("<p id='passwordCheck'><span  class='text-danger'><strong>비밀번호가 일치 하지 않습니다.</strong></span></p>");
+            $('#passwordNotUsed').css('display' , 'block');
+
         } else {
-            $('#passwordGroup').append("<p id='passwordCheck'><span  class='text-success'><strong>비밀번호가 일치 합니다.</strong></span></p>");
+            $('#passwordUsed').css('display' , 'block');
         }
     } else {
-        $('#passwordGroup').append("<p id='passwordCheck'><span  class='text-danger'><strong>영문자,숫자,특수문자로 이루어진 8~16자.</strong></span></p>");
+        $('#passwordValidator').css('display' , 'block');
     }
 }
 
