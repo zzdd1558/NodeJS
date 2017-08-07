@@ -7397,3 +7397,7 @@ body {
 .none-span{
     display: none;
 }
+
+[display="none"] {
+    display: none;
+}

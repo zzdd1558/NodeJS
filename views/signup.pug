@@ -16,15 +16,15 @@ block content
                     div.form-group#emailGroup
                         label(for='email') 이메일
                         input.form-control#email(type='email' placeholder='email 형식에 맞게 입력  ' name='email')
-                        p.text-success.none-span.email-span#emailUsed
+                        p.text-success.email-span#emailUsed(display='none')
                             span
                                 strong 사용가능한 이메일 주소 입니다.
 
-                        p.text-danger.none-span.email-span#emailNotUsed
+                        p.text-danger.email-span#emailNotUsed(display='none')
                             span
                                 strong 사용 불가능한 이메일 주소 입니다.
 
-                        p.text-danger.none-span.email-span#emailOverlap
+                        p.text-danger.email-span#emailOverlap(display='none')
                             span
                                 strong 존재하는 이메일 주소 입니다.
                     div.form-group
@@ -33,13 +33,13 @@ block content
                     div.form-group#passwordGroup
                         label(for='passwordConfirm') 비밀번호 확인
                         input.form-control#passwordConfirm(type='password' placeholder='Enter PasswordConfirm')
-                        p.text-danger.none-span.password-span#passwordNotUsed
+                        p.text-danger.password-span#passwordNotUsed(display='none')
                             span
                                 strong 비밀번호가 일치 하지 않습니다.
-                        p.text-success.none-span.password-span#passwordUsed
+                        p.text-success.password-span#passwordUsed(display='none')
                             span
                                 strong 비밀번호가 일치 합니다.
-                        p.text-danger.none-span.password-span#passwordValidator
+                        p.text-danger.password-span#passwordValidator(display='none')
                             span
                                 strong 영문자,숫자,특수문자로 이루어진 8~16자
                     div.form-group

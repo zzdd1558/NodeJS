@@ -70,12 +70,12 @@ async function signup(req, res) {
         let userBirth = userYear + "-" + userMonth + "-" + userDate;
 
 
-        if (!InputValidator.isValidEmail(userEmail) || !InputValidator.isValidPassword(userPassword) || userEmail.length == 0|| userPassword.length == 0) {
+        if (!InputValidator.isValidEmail(userEmail) || !InputValidator.isValidPassword(userPassword)) {
             res.send(`<script>alert('잘못된 접근입니다'); location.href="/"; </script>`);
         }
 
         let query = `insert into user values (NULL,'${userNickname}','${userPassword}','${userEmail}',NULL,
-            '${userBirth}' , NULL,NULL,NULL,NULL)`;
+            '${userBirth}' , NULL,NULL,NULL,NULL)`;  // TODO : 프로시저
 
         /** 결과값 필요하면 사용하려고 남겨놨습니다 */
         let result = await Database.call(query); // async, await 방식
@@ -94,7 +94,7 @@ async function emailCheck(req, res) {
         let resultDate = 'success';
         let userEmail = req.parameter['email'];
 
-        let query = `select count(*) as emailIsEmpty from user where userEmail = '${userEmail}'`;
+        let query = `select count(*) as emailIsEmpty from user where userEmail = '${userEmail}'`; // TODO : 프로시저
         let result = await Database.call(query); // async, await 방식*!/
 
 

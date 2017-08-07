@@ -6,9 +6,7 @@ import InputValidator from '../../../utils/InputValidator';
 
 const currentDate = new DateFormat();
 
-/** 중복 email인지 확인 여부*/
-let booleanEmailCheck = false;
-
+let isEmailChecked = false;
 
 $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
@@ -22,33 +20,31 @@ $(document).ready(function () {
     /** form submit 부분*/
 
     $("#userForm").submit(function () {
-
         let email = $("#email");
         let password = $("#password");
 
-        let emailValue = email.val();
-        let passwordValue = password.val();
-        let validatorCheck = false;
+        let submit = false;
+        let isPasswordChecked = isPasswordCheck();
 
-        if(!InputValidator.isValidEmail(emailValue) || !booleanEmailCheck){
+        if(!isEmailChecked){
             email.focus();
-        }else if (!InputValidator.isValidPassword(passwordValue)){
+        }else if (!isPasswordChecked){
             password.focus();
-        }else if( InputValidator.isValidEmail(emailValue) && InputValidator.isValidPassword(passwordValue) && booleanEmailCheck){
-            validatorCheck = true;
+        }else if(isPasswordChecked && isEmailChecked){
+            submit = true;
         }
         //코드 부분에 에러가 있다면 false라도 전송이된다.
-        return validatorCheck;
+        return submit;
     });
 
     /** blur 될때마다 ajax로 아이디 검사*/
     $("#email").blur(function () {
-        emailCheck();
+        isEmailCheck();
     });
 
     /** passwordConfirm이 blur 될때마다 password 와 passwordConfirm이 일치하는지 비교 */
     $("#passwordConfirm").blur(function () {
-        passwordCheck();
+        isPasswordCheck();
     });
 
     setYear();
@@ -57,48 +53,58 @@ $(document).ready(function () {
 });
 
 /** 이메일 check*/
-function emailCheck() {
-    $('.email-span').css('display','none');
+function isEmailCheck() {
+    $('.email-span').attr('display','none');
     let email = $("#email").val();
-    if (InputValidator.isValidEmail(email)) {
-        $.ajax({
-            type: 'POST',
-            url: './api/auth/email-check',
-            data: {
-                'email': email
-            },
-            success: function (data) {
-                if (data === 'success') {
-                    $('#emailUsed').css('display' , 'block');
-                    booleanEmailCheck = true;
-                } else {
-                    $('#emailOverlap').css('display' , 'block');
-                }
-            },
-            error: function () {
-                alert("실패");
-            }
-        });
-    } else {
-        $('#emailNotUsed').css('display' , 'block');
+
+    if (!InputValidator.isValidEmail(email)) {
+        showAlertElement('emailNotUsed');
+        isEmailChecked = false;
+
+        return;
     }
+
+    $.ajax({
+        type: 'POST',
+        url: '/api/auth/email-check',
+        data: {
+            'email': email
+        },
+        success: function (data) {
+            if (data === 'success') {
+                showAlertElement('emailUsed');
+                isEmailChecked = true;
+            } else {
+                showAlertElement('emailOverlap');
+                isEmailChecked = false;
+            }
+        },
+        error: function () {
+            alert("실패");
+            isEmailChecked = false;
+        }
+    });
 }
 
 /** 비밀번호 check*/
-function passwordCheck() {
-    $(".password-span").css('display','none');
+function isPasswordCheck() {
+    $(".password-span").attr('display','none');
     let password = $("#password").val();
     let passwordConfirm = $("#passwordConfirm").val();
-    if ((InputValidator.isValidPassword(password) || InputValidator.isValidPassword(passwordConfirm))){
-        if (password != passwordConfirm) {
-            $('#passwordNotUsed').css('display' , 'block');
+    let isChecked = false;
 
-        } else {
-            $('#passwordUsed').css('display' , 'block');
-        }
+    if (!InputValidator.isValidPassword(password)){
+        showAlertElement('passwordValidator');
     } else {
-        $('#passwordValidator').css('display' , 'block');
+        if (password != passwordConfirm) {
+            showAlertElement('passwordNotUsed');
+        } else {
+            showAlertElement('passwordUsed');
+            isChecked = true;
+        }
     }
+
+    return isChecked;
 }
 
 // 현재 년도 - this.maxYear 한만큼 select option 생성.
@@ -118,7 +124,6 @@ function setMonth() {
     for (let i = 1; i <= 12; i++) {
         let checkSelect = "";
         if (i === currentDate.month) {
-            console.log(`같다 ${currentDate.month}`);
             checkSelect = "selected='selected'";
         }
         if(i <10 ){
@@ -148,4 +153,8 @@ function setSelectDays(month = currentDate.month) {
         }
         $("select#date").append("<option " + checkSelect + " value='" + ii + "'>" + i + "일</option>");
     }
+}
+
+function showAlertElement(id) {
+    $(`#${id}`).attr('display', '');
 }
