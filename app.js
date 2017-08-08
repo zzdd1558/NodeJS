@@ -4,9 +4,9 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const loginCheck = require('./Authorization');
 
 const index = require('./routes/index');
-
 const auth = require('./routes/api/auth');
 
 const app = express();
@@ -37,6 +37,7 @@ let Parameters = function (req, res, next) {
     req.parameter = parameters;
     next();
 };
+// app.use(loginCheck); TODO : 
 app.use(Parameters);
 
 app.use('/', index);

@@ -10,6 +10,7 @@ const InputValidator = require('../../utils/InputValidator');
 const HttpRequest = require('../../utils/HttpRequest');
 const Social = require('../../socials/SocialFactory');
 const Database = require('../../database/lib/database');
+const JWT = require('../../utils/JsonWebToken');
 
 
 router.post('/login', login);
