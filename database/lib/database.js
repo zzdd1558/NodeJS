@@ -8,6 +8,7 @@ const config = {
     database : 'blog'
 };
 
+const Procedure = require('./procedure');
 const pool = mysql.createPool(config);
 
 class Database {
@@ -18,15 +19,20 @@ class Database {
 
     static async call(query) {
         let connection = await this.getConnection();
-        let result = await connection.query(query);  // async, await 방식
+        let result = await connection.query(query);
 
-        // return pool.getConnection()   // promise 방식
-        //     .then((connection) => connection.query(query));
+        return result;
+    }
+
+    static async callProcedure(procedureName) {
+        let connection = await this.getConnection();
+        let procedure = `CALL ${procedureName}`;
+
+        let result = await connection.query(procedure);
 
         return result;
     }
 }
 
-
-
 module.exports = Database;
+module.exports.procedure = Procedure;

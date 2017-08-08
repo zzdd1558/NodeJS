@@ -9,7 +9,7 @@ const Parameter = require('../../utils/Parameter');
 const InputValidator = require('../../utils/InputValidator');
 const HttpRequest = require('../../utils/HttpRequest');
 const Social = require('../../socials/SocialFactory');
-const Database = require('../../database/lib/database');
+const Database = require('../../database/index');
 const JWT = require('../../utils/JsonWebToken');
 
 
@@ -75,11 +75,13 @@ async function signup(req, res) {
             res.send(`<script>alert('잘못된 접근입니다'); location.href="/"; </script>`);
         }
 
-        let query = `insert into user values (NULL,'${userNickname}','${userPassword}','${userEmail}',NULL,
-            '${userBirth}' , NULL,NULL,NULL,NULL)`;  // TODO : 프로시저
+        // let query = `insert into user values (NULL,'${userNickname}','${userPassword}','${userEmail}',NULL,
+        //     '${userBirth}' , NULL,NULL,NULL,NULL)`;
+
+        let query = Database.procedure.AUTH.SIGNUP(userNickname, userPassword, userEmail);
 
         /** 결과값 필요하면 사용하려고 남겨놨습니다 */
-        let result = await Database.call(query); // async, await 방식
+        let result = await Database.callProcedure(query);
 
         res.redirect('/');
     } catch (e) {
@@ -95,9 +97,9 @@ async function emailCheck(req, res) {
         let resultDate = 'success';
         let userEmail = req.parameter['email'];
 
-        let query = `select count(*) as emailIsEmpty from user where userEmail = '${userEmail}'`; // TODO : 프로시저
-        let result = await Database.call(query); // async, await 방식*!/
-
+        // let query = `select count(*) as emailIsEmpty from user where userEmail = '${userEmail}'`;
+        let query = Database.procedure.AUTH.EMAIL_CHECK(userEmail);
+        let result = await Database.callProcedure(query);
 
         if (result[0].emailIsEmpty > 0) {
             resultDate = 'fail';
