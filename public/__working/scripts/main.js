@@ -3,7 +3,7 @@
  */
 import "../styles/main.css";
 import "./common.js";
-
+import "../styles/bootstrap.css";
 $(function () {
     console.log(1);
 });

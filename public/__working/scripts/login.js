@@ -3,10 +3,6 @@
  */
 import "../styles/login.css";
 import "./common.js";
-import '../img/login/facebook.png';
-import '../img/login/google.png';
-import '../img/login/kakao.png';
-import '../img/login/naver.png';
 
 let isReirect = typeof isRedirectPage === 'undefined' ? false : isRedirectPage;
 
