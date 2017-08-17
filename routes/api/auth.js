@@ -43,7 +43,6 @@ async function socialLogin(req, res) {
             console.debug();
             return res.status(HttpResponse.StatusCode.PARAMETER_WRONG).end();
         }
-
         let social = new Social(socialType);
         let user = await social.getProfile(accessToken);
 

@@ -1,7 +1,7 @@
-extends layout
-block header
-    script.
-        var isRedirectPage = true;
-    script(src='/scripts/login.bundle.js')
-block content
-    input(type='hidden' token=accessToken social=social)
+doctype html
+html
+    head
+        script.
+            var isRedirectPage = true;
+    body
+        input(type='hidden' token=accessToken social=social)
