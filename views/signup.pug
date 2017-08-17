@@ -4,15 +4,15 @@ block header
     script(src='/scripts/signup.bundle.js')
     link(rel='stylesheet', href='/styles/login.bundle.css')
 block content
-    h1 회원가입
-    div.container(style="max-width:1000px")
+    div.container.login_container
         div.row
+            h1 회원가입
             div.col-sm-6
                 div.row
                     div.col-sm-12
                         //img(src='/images/image.jpg')
             div.col-sm-6
-                form#userForm( action='/api/auth/signup' method='post')
+                form#userForm(action='/api/auth/signup' method='post')
                     div.form-group#emailGroup
                         label(for='email') 이메일
                         input.form-control#email(type='email' placeholder='email 형식에 맞게 입력  ' name='email')
@@ -58,7 +58,7 @@ block content
                             a(href="#" data-toggle="tooltip" data-placement="bottom" title="생일 알림 기능을 위한 수집") 생년월일 정보 수집이유
                     hr
                     div.form-group
-                        div.col-sm-4.col-sm-offset-9
-                            button.btn.btn-info(type='submit') 가입
+                        div.col-sm-6.col-sm-offset-7
+                            button.btn.btn-info.inline_block(type='submit') 가입
                             span &nbsp;&nbsp;&nbsp;&nbsp;
-                            button.btn.btn-danger(type='reset') 취소
+                            button.btn.btn-danger.inline_block(type='reset') 취소

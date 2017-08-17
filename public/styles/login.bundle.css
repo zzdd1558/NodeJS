@@ -7388,6 +7388,10 @@ body {
     float: right;
 }
 
+.inline_block {
+    display: inline-block;
+}
+
 @media (max-width: 768px) {
     .login_btn_container {
         margin-bottom: 12%;
