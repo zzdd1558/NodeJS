@@ -19,16 +19,25 @@ router.post('/signup', signup);
 router.post('/email-check', emailCheck);
 
 
-function login(req, res) {
+async function login(req, res) {
     try {
         let email = Parameter.getLowerCase(req.parameter['email']);
         let password = Parameter.get(req.parameter['password']);
 
-        // TODO : email, password validation
+        if(!InputValidator.isValidEmail(email) || !InputValidator.isValidPassword(password)) {
+            console.debug();
+            return res.status(HttpResponse.StatusCode.PARAMETER_WRONG).end();
+        }
 
-        // TODO : login
+        let query = Database.procedure.AUTH.LOGIN(email, password);
+        let result = await Database.callProcedure(query);
 
+        let userIdx = result.userIdx;
+        let authToken = JWT.createJwtToken(userIdx);
+
+        res.render('main', {'authToken' : authToken});
     } catch (e) {
+        console.debug(e.message);
         res.status(HttpResponse.StatusCode.UNEXPECTED).end();
     }
 }
@@ -45,15 +54,19 @@ async function socialLogin(req, res) {
         }
         let social = new Social(socialType);
         let user = await social.getProfile(accessToken);
+        let email = user.email; // TODO : getProfile json keys 통일
 
-        // TODO : db
-        // TODO : create jwt Token
+        let query = Database.procedure.AUTH.SOCIAL_LOGIN(email, socialType);
+        let result = await Database.callProcedure(query);
+
+        let userIdx = result.userIdx;
+        let authToken = JWT.createJwtToken(userIdx);
 
         console.log(user);
-        res.render('main', {/** jwt Token **/});
+        res.render('main', {'authToken' : authToken});
     }
     catch (e) {
-        console.log(e.message);
+        console.debug(e.message);
         res.status(HttpResponse.StatusCode.UNEXPECTED).end();
     }
 }
@@ -71,7 +84,7 @@ async function signup(req, res) {
 
 
         if (!InputValidator.isValidEmail(userEmail) || !InputValidator.isValidPassword(userPassword)) {
-            res.send(`<script>alert('잘못된 접근입니다'); location.href="/"; </script>`);
+            return res.send(`<script>alert('잘못된 접근입니다'); location.href="/"; </script>`);
         }
 
         // let query = `insert into user values (NULL,'${userNickname}','${userPassword}','${userEmail}',NULL,
@@ -88,7 +101,6 @@ async function signup(req, res) {
         res.status(HttpResponse.StatusCode.UNEXPECTED).end();
     }
 }
-
 
 /** ajax로 email 중복 체크 하는 부분 */
 async function emailCheck(req, res) {

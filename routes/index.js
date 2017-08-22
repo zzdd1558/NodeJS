@@ -17,17 +17,13 @@ function main(req,res){
     res.render('main');
 }
 
-/** 로그인 페이지 */
 function login(req, res){
     res.render('login');
 }
 
-
 function signup(req,res){
     res.render('signup');
 }
-
-
 
 async function dbtest(req, res) {
   try {

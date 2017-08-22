@@ -1,6 +1,14 @@
 
 const Procedure = require('./lib/procedure');
 
+Procedure.AUTH.LOGIN = Procedure.prototype.AUTH.LOGIN = (userEmail, userPassword) => {
+    return `Login(${userEmail}, ${userPassword})`;
+};
+
+Procedure.AUTH.SOCIAL_LOGIN = Procedure.prototype.AUTH.SOCIAL_LOGIN = (userEmail, socialType) => {
+    return `SocialLogin(${userEmail}, ${socialType})`;
+};
+
 Procedure.AUTH.SIGNUP = Procedure.prototype.AUTH.SIGNUP = (userNickname, userPassword, userEmail) => {
     return `SignUp(${userNickname}, ${userPassword}, ${userEmail})`;
 };
