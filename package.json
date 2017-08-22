@@ -12,11 +12,16 @@
     "debug": "~2.6.3",
     "express": "~4.15.2",
     "jquery": "^3.2.1",
+    "jsonwebtoken": "^7.4.1",
     "morgan": "~1.8.1",
     "mysql": "^2.13.0",
     "promise-mysql": "^3.0.1",
     "pug": "~2.0.0-beta11",
-    "serve-favicon": "~2.4.2"
+    "randomstring": "^1.1.5",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
+    "serve-favicon": "~2.4.2",
+    "uniqid": "^4.1.1"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",

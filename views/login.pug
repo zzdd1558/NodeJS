@@ -1,22 +1,24 @@
 extends layout
 block header
     link(rel='stylesheet', href='styles/login.bundle.css')
+    script(src='./scripts/login.bundle.js')
 block content
-    h1 로그인
-    div.container
+    div.container.login_container
         div.row
-            div.col-sm-6(style="text-align:center;")
-                a(href="#")
-                    img(src='./img/facebook.png' style='margin-bottom:3px;').img-rounded
+            h1.login_h1 로그인
+            div.col-sm-6.login_btn_container
+
+                //Facebook 로그인 button
+                button.login_btn.login_btn_facebook#facebook(button-type="social")
                 br
-                a(href="#")
-                    img(src='./img/google.png' style='margin-bottom:3px;').img-rounded
+                //Google 로그인 button
+                button.login_btn.login_btn_google#google(button-type="social")
                 br
-                a(href="#")
-                    img(src='./img/kakao.png' style='margin-bottom:3px;').img-rounded
+                //Kakao 로그인 button
+                button.login_btn.login_btn_kakao#kakao(button-type="social")
                 br
-                a(href="#")
-                    img(src='./img/naver.png' style='margin-bottom:3px;').img-rounded
+                //Naver 로그인 button
+                button.login_btn.login_btn_naver#naver(button-type="social")
             div.col-sm-6
                 form
                     div.form-group
@@ -25,16 +27,14 @@ block content
                     div.form-group
                         label(for='password') 비밀번호
                         input.form-control#password(type='password' placeholder='Enter Password')
-                    div.form-group.text-left
-
+                    div.form-group
                         input(type='checkbox' value='Y' id='check')
                         label(for='check')   아이디 기억
 
-                    ul.list-inline.text-right
-                        li
-                            a(href="#") 회원가입
-                        li
-                            a(href="#") 아이디/비밀번호 찾기
+                        ul.list-inline.login_helper
+                            li
+                                a(href="#") 회원가입
+                            li
+                                a(href="#") 아이디/비밀번호 찾기
                     hr
-                    h2
-                        input(type='submit' value='로그인').btn.btn-info.pull-right
+                    input(type='submit' value='로그인').btn.btn-info.pull-right

@@ -25,19 +25,19 @@ body {
 }
 
 .login_btn_facebook {
-    background-image: url(../img/facebook.png);
+    background-image: url('../img/login/facebook.png');
 }
 
 .login_btn_google {
-    background-image: url(../img/google.png);
+    background-image: url('../img/login/google.png');
 }
 
 .login_btn_kakao {
-    background-image: url(../img/kakao.png);
+    background-image: url('../img/login/kakao.png');
 }
 
 .login_btn_naver {
-    background-image: url(../img/naver.png);
+    background-image: url('../img/login/naver.png');
 }
 
 .login_helper {
