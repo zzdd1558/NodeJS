@@ -34,5 +34,11 @@ class Database {
     }
 }
 
+const databaseStatusCode = {
+    OK : 1,
+    LOGIN_FAIL : -1
+};
+
 module.exports = Database;
+module.exports.StatusCode = databaseStatusCode;
 module.exports.procedure = Procedure;

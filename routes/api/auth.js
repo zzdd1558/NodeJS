@@ -25,12 +25,16 @@ async function login(req, res) {
         let password = Parameter.get(req.parameter['password']);
 
         if(!InputValidator.isValidEmail(email) || !InputValidator.isValidPassword(password)) {
-            console.debug();
+            console.debug(`${email}`);
             return res.status(HttpResponse.StatusCode.PARAMETER_WRONG).end();
         }
 
         let query = Database.procedure.AUTH.LOGIN(email, password);
         let result = await Database.callProcedure(query);
+
+        if(result['dberr'] == Database.StatusCode.LOGIN_FAIL) {
+            return res.status(HttpResponse.StatusCode.LOGIN_FAIL).end();
+        }
 
         let userIdx = result.userIdx;
         let authToken = JWT.createJwtToken(userIdx);
