@@ -8,7 +8,6 @@ let isReirect = typeof isRedirectPage === 'undefined' ? false : isRedirectPage;
 
 $(function () {
     $("button[button-type=social]").click(function() {
-        console.log(1);
         let social = $(this).attr('id');
 
         location.href = `/social/${social}/login`;
@@ -21,7 +20,7 @@ $(function () {
 
 function redirect () {
     let at = $("input[type=hidden]");
-    let socialType = at.attr('social');
     let token = at.attr('token');
-    $.post(`/api/auth/social/${socialType}/login`, {accessToken: token});
+    let form = $("#form");
+    form.submit();
 }

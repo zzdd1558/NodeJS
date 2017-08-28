@@ -53,7 +53,7 @@ async function socialLogin(req, res) {
         let accessToken = decodeURI(Parameter.get(req.parameter['accessToken']));
 
         if (!InputValidator.isValidSocialType(socialType) || accessToken.length == 0) {
-            console.debug();
+            console.debug(`${socialType}, ${accessToken}`);
             return res.status(HttpResponse.StatusCode.PARAMETER_WRONG).end();
         }
         let social = new Social(socialType);
@@ -66,7 +66,6 @@ async function socialLogin(req, res) {
         let userIdx = result.userIdx;
         let authToken = JWT.createJwtToken(userIdx);
 
-        console.log(user);
         res.render('main', {'authToken' : authToken});
     }
     catch (e) {

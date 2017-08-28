@@ -3,5 +3,8 @@ html
     head
         script.
             var isRedirectPage = true;
+        script(src='/scripts/commons.chunk.bundle.js')
+        script(src='/scripts/login.bundle.js')
     body
-        input(type='hidden' token=accessToken social=social)
+        form(id='form' action='/api/auth/social/'+social+'/login', method='post')
+            input(type='hidden' name="accessToken" value=accessToken)
