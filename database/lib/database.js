@@ -24,6 +24,13 @@ class Database {
         return result;
     }
 
+    static async testCall(query,value) {
+        let connection = await this.getConnection();
+        let result = await connection.query(query, value);
+
+        return result;
+    }
+
     static async callProcedure(procedureName) {
         let connection = await this.getConnection();
         let procedure = `CALL ${procedureName}`;

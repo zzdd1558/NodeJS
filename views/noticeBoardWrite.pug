@@ -1,0 +1,24 @@
+extends layout
+block header
+
+block content
+    h3  글쓰기
+    br
+    form(method="post" action="/board")
+
+        .row
+            .form-group.col-sm-3
+                select(name="title").form-control#title
+                    option 카테고리
+
+            .form-group.col-sm-9
+                input(type="text" name="title").form-control#title1
+        .row
+            .form-group.col-sm-12
+                textarea.form-control#comment(rows="20" name="content")
+        div.form-group
+            div(style="text-align:center")
+                button.btn.btn-success.inline_block(type='submit') 작성
+                span &nbsp;&nbsp;&nbsp;&nbsp;
+                button.btn.btn-danger.inline_block(type='reset') 취소
+

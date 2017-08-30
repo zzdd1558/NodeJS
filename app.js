@@ -8,7 +8,7 @@ const loginCheck = require('./Authorization');
 
 const index = require('./routes/index');
 const auth = require('./routes/api/auth');
-const boards = require('./routes/board/boards');
+const boards = require('./routes/boards');
 const app = express();
 
 // view engine setup
@@ -29,6 +29,8 @@ let Parameters = function (req, res, next) {
         parameters = req.body;
     } else if(req.method == 'GET') {
         parameters = req.query;
+    }else if(req.method == 'PUT' || req.method == 'DELETE'){
+        parameters = req.params;
     } else {
         let err = new Error("ERROR IN MIDDLEWARE");
         next(err);
@@ -42,7 +44,7 @@ app.use(Parameters);
 
 app.use('/', index);
 app.use('/api/auth', auth);
-app.use('/board/boards', boards);
+app.use('/board', boards);
 
 app.use(function(req, res, next) {
   let err = new Error('Not Found');
