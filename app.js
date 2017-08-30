@@ -8,7 +8,7 @@ const loginCheck = require('./Authorization');
 
 const index = require('./routes/index');
 const auth = require('./routes/api/auth');
-
+const boards = require('./routes/board/boards');
 const app = express();
 
 // view engine setup
@@ -42,6 +42,7 @@ app.use(Parameters);
 
 app.use('/', index);
 app.use('/api/auth', auth);
+app.use('/board/boards', boards);
 
 app.use(function(req, res, next) {
   let err = new Error('Not Found');
