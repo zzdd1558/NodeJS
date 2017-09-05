@@ -32,11 +32,9 @@ async function boardWriteDB(req, res) {
 
     let result;
     try {
-        let values = [boardUserEmail,boardTitle, boardContent, categoryNum];
-
-        console.log(values);
-        result = await Database.testCall("insert into blogBoard values ( NULL , ? , ? , ? , now() , 0 ,?)", values);
-        console.log(result);
+        let values = [boardUserEmail, boardTitle, boardContent, categoryNum];
+        let sql = "insert into blogBoard values ( NULL , ? , ? , ? , now() , 0 ,?)";
+        result = await Database.testCall(sql, values);
     } catch (e) {
         console.log(e);
     }
@@ -47,28 +45,36 @@ async function boardWriteDB(req, res) {
 
 async function boardRead(req, res) {
     let result;
-
+    let sendResultData="";
     try {
         /** 파라미터로 값 받기 */
         let id = req.params['id'];
-
         /** preparedstatement 값 */
         let values = [id];
 
+
+
         /** SQL Query 작성*/
-        let query = `select * from board where idx=?`;
+        let query = `select * from blogBoard INNER JOIN category ON blogBoard.category_num = category.category_num WHERE boardIdx = ?`;
 
         /** Database.testCall로 query와 배열 전송*/
         result = await Database.testCall(query, values);
-
+        sendResultData = result[0];
     } catch (e) {
         console.log(`Error :  ${e}`);
     }
 
-    res.status(HttpResponse.StatusCode.OK).render('noticeBoardRead', {title: "abcd"});
+    res.status(HttpResponse.StatusCode.OK).render('noticeBoardRead', {
+        title: sendResultData.boardTitle,
+        content: sendResultData.boardContent,
+        Writer: sendResultData.boardEmail,
+        writeTime : sendResultData.boardTime,
+        viewsCount  : sendResultData.boardViewsCount,
+        category : sendResultData.category_name
+    });
 }
 async function boardUpdate(req, res) {
-    let result
+    let result;
     try {
 
         let query = "";
@@ -91,18 +97,18 @@ async function boardDelete(req, res) {
     res.send('딜리트 delete');
 }
 
-async function getCategory(req,res){
+async function getCategory(req, res) {
     let result;
-    try{
-        let query="SELECT * FROM category";
+    try {
+        let query = "SELECT * FROM category";
         result = await Database.call(query);
 
-    }catch(e){
+    } catch (e) {
 
     }
 
 
-    console.log ( result );
+    console.log(result);
     res.send(result);
 }
 
