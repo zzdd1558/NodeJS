@@ -1,6 +1,7 @@
 extends layout
-block header
 
+block header
+    script(src='./scripts/board.bundle.js')
 block content
     h3  글쓰기
     br
@@ -8,11 +9,11 @@ block content
 
         .row
             .form-group.col-sm-3
-                select(name="title").form-control#title
+                select(name="category").form-control#category
                     option 카테고리
 
             .form-group.col-sm-9
-                input(type="text" name="title").form-control#title1
+                input(type="text" name="title").form-control#title
         .row
             .form-group.col-sm-12
                 textarea.form-control#comment(rows="20" name="content")

@@ -13,6 +13,12 @@ router.get('/signup', signup);
 router.get('/social/:socialType/login', socialLogin);
 router.get('/social/:socialType/auth', socialAuth);
 
+// 글작성 페이지로 render
+router.get('/board', boardWrite)
+
+function boardWrite(req, res) {
+    res.render('noticeBoardWrite');
+}
 function main(req,res){
     res.render('main');
 }
