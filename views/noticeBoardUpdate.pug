@@ -1,0 +1,30 @@
+extends layout
+
+block header
+    script(src='../../scripts/board.bundle.js')
+
+block content
+    h3  글 수정
+    br
+    form(method="post" action="/board/update")
+        .row
+            input(type="hidden" value=result.boardIdx name="boardIdx")
+            input(type="hidden" value=result.category_num name="categoryNum")
+            .form-group.col-sm-3
+                select(name="category").form-control#category
+                    option(value="0") 카테고리
+            .form-group.col-sm-9
+                input(type="text" name="title" value=result.boardTitle).form-control#title
+
+        .row
+            .form-group.col-sm-12
+                textarea.form-control#comment(rows="20" name="content")= result.boardContent
+
+
+        div.form-group
+            div(style="text-align:center")
+                button.btn.btn-success.inline_block(type='submit' )#submit 수정
+                span &nbsp;&nbsp;&nbsp;&nbsp;
+                button.btn.btn-danger.inline_block(type='reset') 취소
+
+

@@ -13,15 +13,20 @@ router.post('/', boardWriteDB);
 router.get('/:id', boardRead);
 
 //글 수정
-router.put('/:id', boardUpdate);
+router.get('/update/:id', updateDataRead);
+router.post('/update', updateData);
 
 //글 삭제
 router.delete('/:id', boardDelete);
 
+//ajax로 카테고리 목록 받아오는 부분
 router.post('/category/getCategory', getCategory);
 
-
+/** method = post  글 DB에 저장하는 함수.*/
 async function boardWriteDB(req, res) {
+
+    console.log("post");
+
     /** user Email 어떻게 넣어줄지 ..*/
     let boardUserEmail = 'zzdd1558@naver.com';
 
@@ -33,19 +38,20 @@ async function boardWriteDB(req, res) {
     let result;
     try {
         let values = [boardUserEmail, boardTitle, boardContent, categoryNum];
-        let sql = "insert into blogBoard values ( NULL , ? , ? , ? , now() , 0 ,?)";
+        let sql = "insert into blogBoard values ( NULL , ? , ? , ? , now() , now() , 0 ,?)";
         result = await Database.testCall(sql, values);
     } catch (e) {
         console.log(e);
     }
-    /** post 값 받을때 req.parameter['name'] 사용*/
+
     res.status(HttpResponse.StatusCode.OK).redirect("/");
 }
 
 
+/** method = get  DB에 저장되어 있는 글 읽어 오는 함수*/
 async function boardRead(req, res) {
     let result;
-    let sendResultData="";
+    let sendResultData = "";
     try {
         /** 파라미터로 값 받기 */
         let id = req.params['id'];
@@ -53,43 +59,63 @@ async function boardRead(req, res) {
         let values = [id];
 
 
-
         /** SQL Query 작성*/
-        let query = `select * from blogBoard INNER JOIN category ON blogBoard.category_num = category.category_num WHERE boardIdx = ?`;
+        let query = `select boardTitle,boardContent,boardEmail,  DATE_FORMAT(boardTime ,"%Y.%c.%e %H:%i" ) as boardTime, boardViewsCount,category_name from blogBoard INNER JOIN category ON blogBoard.category_num = category.category_num WHERE boardIdx = ?`;
 
         /** Database.testCall로 query와 배열 전송*/
         result = await Database.testCall(query, values);
         sendResultData = result[0];
+        console.log(sendResultData);
     } catch (e) {
         console.log(`Error :  ${e}`);
     }
 
-    res.status(HttpResponse.StatusCode.OK).render('noticeBoardRead', {
-        title: sendResultData.boardTitle,
-        content: sendResultData.boardContent,
-        Writer: sendResultData.boardEmail,
-        writeTime : sendResultData.boardTime,
-        viewsCount  : sendResultData.boardViewsCount,
-        category : sendResultData.category_name
-    });
-}
-async function boardUpdate(req, res) {
-    let result;
-    try {
+    res.status(HttpResponse.StatusCode.OK).render('noticeBoardRead', {result: sendResultData});
 
-        let query = "";
-        let result = await Database.testCall(query, values);
+}
+async function updateDataRead(req, res) {
+    let result;
+    let boardIdx = req.params['id'];
+    let sendResultData;
+    try {
+        let query = "SELECT boardIdx,boardTitle, boardContent, category_num FROM blogBoard WHERE boardIdx = ?";
+        result = await Database.testCall(query, boardIdx);
+        sendResultData = result[0];
+    } catch (e) {
+    }
+    res.status(HttpResponse.StatusCode.OK).render('noticeBoardUpdate', {result: sendResultData});
+}
+
+
+async function updateData(req,res){
+    let result;
+    let boardIdx = req.parameter['boardIdx'];
+    let categoryNum = req.parameter['category'];
+    let boardTitle = req.parameter['title'];
+    let boardContent = req.parameter['content'];
+
+    let values = [categoryNum , boardTitle , boardContent ,boardIdx ];
+
+    console.log(values);
+
+    try {
+        let query = `UPDATE blogBoard SET category_num = ? , boardTitle=? , boardContent=?,lastUpdateTime=now() where boardIdx = ?`;
+        result = await Database.testCall(query, values);
 
         console.log(result);
     } catch (e) {
     }
-    res.send('풋 put');
+    res.status(HttpResponse.StatusCode.OK).redirect(`/board/${boardIdx}`);
 }
+
+/** 게시글 삭제 */
 async function boardDelete(req, res) {
+
+    let boardIdx = req.parameter['boardIdx'];
     try {
 
-        let query = "";
-        let result = await Database.testCall(query, values);
+        let query = "delete from blogBoard where boardIdx = ?";
+        let result = await Database.testCall(query, boardIdx);
 
         console.log(result);
     } catch (e) {
@@ -97,6 +123,8 @@ async function boardDelete(req, res) {
     res.send('딜리트 delete');
 }
 
+
+/** 카테고리 종류 반환 */
 async function getCategory(req, res) {
     let result;
     try {
@@ -106,8 +134,6 @@ async function getCategory(req, res) {
     } catch (e) {
 
     }
-
-
     console.log(result);
     res.send(result);
 }
