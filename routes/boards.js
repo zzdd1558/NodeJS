@@ -38,7 +38,7 @@ async function boardWriteDB(req, res) {
     let result;
     try {
         let values = [boardUserEmail, boardTitle, boardContent, categoryNum];
-        let sql = "insert into blogBoard values ( NULL , ? , ? , ? , now() , now() , 0 ,?)";
+        let sql = "INSERT INTO blogBoard VALUES ( NULL , ? , ? , ? , now() , now() , 0 ,?)";
         result = await Database.testCall(sql, values);
     } catch (e) {
         console.log(e);
@@ -53,19 +53,15 @@ async function boardRead(req, res) {
     let result;
     let sendResultData = "";
     try {
-        /** 파라미터로 값 받기 */
         let id = req.params['id'];
-        /** preparedstatement 값 */
         let values = [id];
 
-
         /** SQL Query 작성*/
-        let query = `select boardTitle,boardContent,boardEmail,  DATE_FORMAT(boardTime ,"%Y.%c.%e %H:%i" ) as boardTime, boardViewsCount,category_name from blogBoard INNER JOIN category ON blogBoard.category_num = category.category_num WHERE boardIdx = ?`;
+        let query = `SELECT boardTitle,boardContent,boardEmail,  DATE_FORMAT(boardTime ,"%Y.%c.%e %H:%i" ) AS boardTime, boardViewsCount,category_name FROM blogBoard INNER JOIN category ON blogBoard.category_num = category.category_num WHERE boardIdx = ?`;
 
         /** Database.testCall로 query와 배열 전송*/
         result = await Database.testCall(query, values);
         sendResultData = result[0];
-        console.log(sendResultData);
     } catch (e) {
         console.log(`Error :  ${e}`);
     }
@@ -87,14 +83,14 @@ async function updateDataRead(req, res) {
 }
 
 
-async function updateData(req,res){
+async function updateData(req, res) {
     let result;
     let boardIdx = req.parameter['boardIdx'];
     let categoryNum = req.parameter['category'];
     let boardTitle = req.parameter['title'];
     let boardContent = req.parameter['content'];
 
-    let values = [categoryNum , boardTitle , boardContent ,boardIdx ];
+    let values = [categoryNum, boardTitle, boardContent, boardIdx];
 
     console.log(values);
 
@@ -114,7 +110,7 @@ async function boardDelete(req, res) {
     let boardIdx = req.parameter['boardIdx'];
     try {
 
-        let query = "delete from blogBoard where boardIdx = ?";
+        let query = "DELETE FROM blogBoard WHERE boardIdx = ?";
         let result = await Database.testCall(query, boardIdx);
 
         console.log(result);
